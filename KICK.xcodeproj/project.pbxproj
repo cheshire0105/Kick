@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		AB8AF33F2AA5BD5D009A5644 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = AB8AF33E2AA5BD5D009A5644 /* SnapKit */; };
 		FF006F542AA58CEF00A3CB8A /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF006F532AA58CEF00A3CB8A /* Model.swift */; };
+		FF36A79A2AA5F00800980717 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF36A7992AA5F00800980717 /* UserManager.swift */; };
 		FF557F172AA5695B00C9CAEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF557F162AA5695B00C9CAEC /* AppDelegate.swift */; };
 		FF557F192AA5695B00C9CAEC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF557F182AA5695B00C9CAEC /* SceneDelegate.swift */; };
 		FF557F1E2AA5695B00C9CAEC /* MainTabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF557F1C2AA5695B00C9CAEC /* MainTabBar.storyboard */; };
@@ -23,11 +24,12 @@
 		FF557F372AA56A4500C9CAEC /* KickBoardRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF557F362AA56A4500C9CAEC /* KickBoardRegisterViewController.swift */; };
 		FF557F392AA56A6E00C9CAEC /* MypageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF557F382AA56A6E00C9CAEC /* MypageViewController.swift */; };
 		FF557F3E2AA56FCD00C9CAEC /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF557F3D2AA56FCD00C9CAEC /* TabBarController.swift */; };
-		FFDAD66D2AA5B11D00FCCEAB /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDAD66C2AA5B11D00FCCEAB /* Manager.swift */; };
+		FFDAD66D2AA5B11D00FCCEAB /* KickboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDAD66C2AA5B11D00FCCEAB /* KickboardManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		FF006F532AA58CEF00A3CB8A /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		FF36A7992AA5F00800980717 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		FF557F132AA5695B00C9CAEC /* KICK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KICK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF557F162AA5695B00C9CAEC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FF557F182AA5695B00C9CAEC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -44,7 +46,7 @@
 		FF557F362AA56A4500C9CAEC /* KickBoardRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KickBoardRegisterViewController.swift; sourceTree = "<group>"; };
 		FF557F382AA56A6E00C9CAEC /* MypageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageViewController.swift; sourceTree = "<group>"; };
 		FF557F3D2AA56FCD00C9CAEC /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
-		FFDAD66C2AA5B11D00FCCEAB /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
+		FFDAD66C2AA5B11D00FCCEAB /* KickboardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KickboardManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,7 +96,8 @@
 			isa = PBXGroup;
 			children = (
 				FF006F532AA58CEF00A3CB8A /* Model.swift */,
-				FFDAD66C2AA5B11D00FCCEAB /* Manager.swift */,
+				FFDAD66C2AA5B11D00FCCEAB /* KickboardManager.swift */,
+				FF36A7992AA5F00800980717 /* UserManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -211,7 +214,8 @@
 				FF557F3E2AA56FCD00C9CAEC /* TabBarController.swift in Sources */,
 				FF557F372AA56A4500C9CAEC /* KickBoardRegisterViewController.swift in Sources */,
 				FF557F192AA5695B00C9CAEC /* SceneDelegate.swift in Sources */,
-				FFDAD66D2AA5B11D00FCCEAB /* Manager.swift in Sources */,
+				FFDAD66D2AA5B11D00FCCEAB /* KickboardManager.swift in Sources */,
+				FF36A79A2AA5F00800980717 /* UserManager.swift in Sources */,
 				FF006F542AA58CEF00A3CB8A /* Model.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

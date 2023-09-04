@@ -71,9 +71,9 @@ class KickBoardRegisterViewController: UIViewController {
             return
         }
         
-        if var kickboard = UserDefaultsManager.shared.getKickboard(uniqueID: kickboardID) {
+        if var kickboard = KickboardManager.shared.getKickboard(uniqueID: kickboardID) {
             kickboard.isRented.toggle()
-            UserDefaultsManager.shared.saveKickboard(kickboard: kickboard)
+            KickboardManager.shared.saveKickboard(kickboard: kickboard)
             updateRentReturnButton(isRented: kickboard.isRented)
             
             // 이 부분에서 실제 배터리 수준 정보를 가져와야 함. 현재는 더미 값으로 설정됨
