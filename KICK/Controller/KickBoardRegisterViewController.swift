@@ -8,6 +8,8 @@
 import UIKit
 import AVFoundation
 
+
+
 class KickBoardRegisterViewController: UIViewController {
     
     // MARK: - Outlets
@@ -31,7 +33,13 @@ class KickBoardRegisterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+#if targetEnvironment(simulator)
+        // 시뮬레이터에서 실행되는 경우: 카메라 기능을 비활성화하거나 모의 데이터를 사용
+#else
+        // 실제 디바이스에서 실행되는 경우: 카메라 기능을 활성화
         setupCameraSession()
+#endif
+        
         loadKickboardInfo()
     }
     
