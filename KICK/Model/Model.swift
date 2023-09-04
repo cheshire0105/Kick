@@ -43,4 +43,6 @@ struct User: Codable {
 struct Kickboard: Codable {
     var uniqueID: String // UUID를 String으로 변경
     var isRented: Bool
+    var batteryLevel: Int // 배터리 수준을 퍼센트로 표시 (0~100)
+
 }
