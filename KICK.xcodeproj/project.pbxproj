@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FF006F542AA58CEF00A3CB8A /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF006F532AA58CEF00A3CB8A /* Model.swift */; };
 		FF557F172AA5695B00C9CAEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF557F162AA5695B00C9CAEC /* AppDelegate.swift */; };
 		FF557F192AA5695B00C9CAEC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF557F182AA5695B00C9CAEC /* SceneDelegate.swift */; };
 		FF557F1E2AA5695B00C9CAEC /* MainTabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF557F1C2AA5695B00C9CAEC /* MainTabBar.storyboard */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FF006F532AA58CEF00A3CB8A /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		FF557F132AA5695B00C9CAEC /* KICK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KICK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF557F162AA5695B00C9CAEC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FF557F182AA5695B00C9CAEC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 		FF557F3A2AA56A7F00C9CAEC /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FF006F532AA58CEF00A3CB8A /* Model.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -197,6 +200,7 @@
 				FF557F3E2AA56FCD00C9CAEC /* TabBarController.swift in Sources */,
 				FF557F372AA56A4500C9CAEC /* KickBoardRegisterViewController.swift in Sources */,
 				FF557F192AA5695B00C9CAEC /* SceneDelegate.swift in Sources */,
+				FF006F542AA58CEF00A3CB8A /* Model.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
