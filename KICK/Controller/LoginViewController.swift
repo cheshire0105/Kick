@@ -11,6 +11,155 @@ import SnapKit
 
 class LoginViewController: UIViewController  {
     
+    
+    private let accountInputView = UIView()
+    
+    private let logoImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "logoImage")
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    
+    private let idLabel = {
+        let label = UILabel()
+        label.text = "I D"
+        label.textColor = UIColor.black
+        label.backgroundColor = UIColor.systemBlue
+        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.textAlignment = .center
+        return label
+    }()
+    
+    private let idTextField = {
+        let textField = UITextField()
+        textField.placeholder = "아이디를 입력해보세요!"
+        textField.textColor = UIColor.black
+        textField.backgroundColor = UIColor.cyan
+        textField.font = UIFont.boldSystemFont(ofSize: 18)
+        return textField
+    }()
+    
+    private let passwordLabel = {
+        let label = UILabel()
+        label.text = "password"
+        label.textColor = UIColor.black
+        label.backgroundColor = UIColor.systemBlue
+        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.textAlignment = .center
+        return label
+    }()
+    
+    private let passwordTextField = {
+        let textField = UITextField()
+        textField.placeholder = "비밀번호를 입력해보세요!"
+        textField.textColor = UIColor.black
+        textField.backgroundColor = UIColor.cyan
+        textField.font = UIFont.boldSystemFont(ofSize: 18)
+        return textField
+    }()
+    
+    private let logInButton = {
+        let button = UIButton()
+        button.titleLabel?.text = "로그인"
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.backgroundColor = UIColor.black
+        return button
+    }()
+    
+    private let signUpButton = {
+        let button = UIButton()
+        button.titleLabel?.text = "회원가입"
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.backgroundColor = UIColor.black
+        return button
+    }()
+    
+    
+    
+    
+    
+    
+/*--------------------------------------------------------*/
+    
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+       
+        
+        configureAccountInputView()
+        configureLayout()
+    }
+    
+    
+    
+    
+/*--------------------------------------------------------*/
+    func configureAccountInputView () {
+        
+        for subview in [idLabel, idTextField, passwordLabel, passwordTextField, logInButton, signUpButton] {
+            accountInputView.addSubview(subview)
+        }
+        
+        idLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview()
+            make.top.equalToSuperview()
+            make.trailing.equalTo(passwordLabel)
+        }
+        
+        passwordLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview()
+            make.top.equalTo(idLabel.snp.bottom).offset(5)
+            make.trailing.equalTo(idLabel)
+        }
+        
+        idTextField.snp.makeConstraints { make in
+            make.leading.equalTo(idLabel.snp.trailing).offset(5)
+            make.top.equalToSuperview()
+            make.trailing.equalToSuperview()
+        }
+        
+        passwordTextField.snp.makeConstraints { make in
+            make.leading.equalTo(passwordLabel.snp.trailing).offset(5)
+            make.top.equalTo(idLabel.snp.bottom).offset(5)
+            make.trailing.equalToSuperview()
+        }
+    }
+    
+    func configureLayout () {
+        
+        for subview in [ logoImageView,logInButton, signUpButton, accountInputView ] {
+            view.addSubview(subview)
+        }
+        
+        logoImageView.snp.makeConstraints{ make in
+            make.height.equalTo(300)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(30)
+            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-10)
+            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(10)
+        }
+        
+        accountInputView.snp.makeConstraints { make in
+            make.top.equalTo(logoImageView.snp.bottom).offset(20)
+            make.leading.equalToSuperview().offset(20)
+           
+        }
+        
+        logInButton.snp.makeConstraints { make in
+            make.leading.equalTo(accountInputView.snp.trailing).offset(5)
+            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-20)
+            make.top.equalTo(accountInputView)
+            make.bottom.equalTo(accountInputView)
+        
+        }
+        
+        signUpButton.snp.makeConstraints { make in
+
+        }
+    }
+    
     @IBAction func testButton(_ sender: UIButton) {
         
         let storyboard = UIStoryboard(name: "MainTabBar", bundle: nil)
@@ -21,65 +170,4 @@ class LoginViewController: UIViewController  {
             }
         }
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-//        view.backgroundColor = .clear
-        
-        idLabel()
-        //idTextField()
-        pwLabel()
-        logInButton()
-        
-    }
-  
 }
-
-extension LoginViewController : UITextFieldDelegate {
-    
-    func idLabel () {
-        let label = UILabel()
-        label.text = "I D"
-        label.frame = CGRect(x: 50, y: 400, width: 50, height: 30)
-        label.textColor = UIColor.black
-        label.backgroundColor = UIColor.systemBlue
-        label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.textAlignment = .center
-        self.view.addSubview(label)
-    }
-    
-    func pwLabel () {
-        let label = UILabel()
-        label.text = "P W"
-        label.frame = CGRect(x: 50, y: 450, width: 50, height: 30)
-        label.textColor = UIColor.black
-        label.backgroundColor = UIColor.systemBlue
-        label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.textAlignment = .center
-        self.view.addSubview(label)
-    }
-    
-    //    func idTextField() {
-    //        print("idTextField")
-    //        let textField = UITextField()
-    //        textField.placeholder = "your id"
-    //        textField.backgroundColor = UIColor.lightGray
-    //        textField.alpha = 1.0
-    //        textField.frame(forAlignmentRect: CGRect(x: 50 , y: 100, width: 200, height: 30))
-    //        textField.borderStyle = .roundedRect
-    //        textField.delegate = self
-    //        self.view.addSubview(textField)
-    //    }
-    
-    func logInButton() {
-        let button = UIButton()
-        button.setTitle("로그인", for: .normal)
-        button.setTitleColor(UIColor.black, for: .normal)
-        button.backgroundColor = UIColor.cyan
-        button.frame(forAlignmentRect: CGRect(x: 100, y: 200, width: 50, height: 50))
-        view.addSubview(button)
-    }
-}
-
-
