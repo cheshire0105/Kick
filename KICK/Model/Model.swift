@@ -41,7 +41,7 @@ struct User: Codable {
 
 // 킥보드 정보를 담은 구조체
 struct Kickboard: Codable {
-    var uniqueID: UUID
+    var uniqueID: String // UUID를 String으로 변경
     var isRented: Bool
 }
 
