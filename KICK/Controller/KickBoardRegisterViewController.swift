@@ -34,11 +34,20 @@ class KickBoardRegisterViewController: UIViewController {
         super.viewDidLoad()
         
 #if targetEnvironment(simulator)
-        // 시뮬레이터에서 실행되는 경우: 카메라 기능을 비활성화하거나 모의 데이터를 사용
+    // 시뮬레이터에서 실행되는 경우: 카메라 기능을 비활성화하거나 모의 데이터를 사용
+    let dummyImageView = UIImageView(image: UIImage(named: "dummyCameraImage"))
+    dummyImageView.frame = cameraView.bounds
+    dummyImageView.contentMode = .scaleAspectFit
+    cameraView.addSubview(dummyImageView)
+    
+    let alert = UIAlertController(title: "Notice", message: "Camera is not available on simulator. Using dummy data instead.", preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "OK", style: .default))
+    self.present(alert, animated: true)
 #else
-        // 실제 디바이스에서 실행되는 경우: 카메라 기능을 활성화
-        setupCameraSession()
+    // 실제 디바이스에서 실행되는 경우: 카메라 기능을 활성화
+    setupCameraSession()
 #endif
+
         
         loadKickboardInfo()
     }
