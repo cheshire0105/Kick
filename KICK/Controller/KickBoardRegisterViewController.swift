@@ -18,7 +18,7 @@ class KickBoardRegisterViewController: UIViewController {
     @IBOutlet weak var kickboardInfoLabel: UILabel!
     
     // MARK: - Properties
-    var captureSession: AVCaptureSession!
+    var captureSession: AVCaptureSession?
     var previewLayer: AVCaptureVideoPreviewLayer!
     var isAlertShown = false
     
@@ -34,20 +34,24 @@ class KickBoardRegisterViewController: UIViewController {
         super.viewDidLoad()
         
 #if targetEnvironment(simulator)
-    // 시뮬레이터에서 실행되는 경우: 카메라 기능을 비활성화하거나 모의 데이터를 사용
-    let dummyImageView = UIImageView(image: UIImage(named: "dummyCameraImage"))
-    dummyImageView.frame = cameraView.bounds
-    dummyImageView.contentMode = .scaleAspectFit
-    cameraView.addSubview(dummyImageView)
-    
-    let alert = UIAlertController(title: "Notice", message: "Camera is not available on simulator. Using dummy data instead.", preferredStyle: .alert)
-    alert.addAction(UIAlertAction(title: "OK", style: .default))
-    self.present(alert, animated: true)
+        let dummyImageView = UIImageView(image: UIImage(named: "dummyCameraImage"))
+        dummyImageView.frame = cameraView.bounds
+        dummyImageView.contentMode = .scaleAspectFit
+        cameraView.addSubview(dummyImageView)
+        
+        // 버튼을 추가하여 더미 데이터 확인 로직을 테스트
+        let checkButton = UIButton(frame: CGRect(x: 20, y: 50, width: 100, height: 50))
+        checkButton.setTitle("Check", for: .normal)
+        checkButton.backgroundColor = .blue
+        checkButton.addTarget(self, action: #selector(checkDummyData), for: .touchUpInside)
+        view.addSubview(checkButton)
+        
+        let alert = UIAlertController(title: "Notice", message: "Camera is not available on simulator. Using dummy data instead.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        self.present(alert, animated: true)
 #else
-    // 실제 디바이스에서 실행되는 경우: 카메라 기능을 활성화
-    setupCameraSession()
+        setupCameraSession()
 #endif
-
         
         loadKickboardInfo()
     }
@@ -61,8 +65,8 @@ class KickBoardRegisterViewController: UIViewController {
         super.viewWillAppear(animated)
         
         if captureSession?.isRunning == false {
-            DispatchQueue.global().async {
-                self.captureSession.startRunning()
+            DispatchQueue.global().async { [weak self] in
+                self?.captureSession?.startRunning()
             }
         }
     }
@@ -71,65 +75,83 @@ class KickBoardRegisterViewController: UIViewController {
         super.viewWillDisappear(animated)
         
         if captureSession?.isRunning == true {
-            DispatchQueue.global().async {
-                self.captureSession.stopRunning()
+            DispatchQueue.global().async { [weak self] in
+                self?.captureSession?.stopRunning()
             }
         }
     }
     
+    
     // MARK: - Setup Methods
+    @objc func checkDummyData() {
+        found(code: "12345-abcde-67890")
+    }
+    
     func loadKickboardInfo() {
-        // 더미 데이터를 사용하여 kickboardInfo 프로퍼티를 설정
         kickboardInfo = Kickboard(uniqueID: "12345-abcde-67890", isRented: false)
     }
     
     private func setupCameraSession() {
         captureSession = AVCaptureSession()
         
-        configureVideoInput()
-        configureMetadataOutput()
+        guard let captureSession = captureSession else { return }
         
-        previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+        configureVideoInput(session: captureSession)
+        configureMetadataOutput(session: captureSession)
+        
+        setupPreviewLayer(session: captureSession)
+        
+        DispatchQueue.global().async {
+            captureSession.startRunning()
+        }
+    }
+    
+    private func configureVideoInput(session: AVCaptureSession) {
+        guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else { return }
+        
+        do {
+            let videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
+            
+            if session.canAddInput(videoInput) {
+                session.addInput(videoInput)
+            } else {
+                displayErrorAlert(message: "Unable to add video input.")
+            }
+            
+        } catch {
+            displayErrorAlert(message: "Error configuring video input: \(error.localizedDescription)")
+        }
+    }
+    
+    private func configureMetadataOutput(session: AVCaptureSession) {
+        let metadataOutput = AVCaptureMetadataOutput()
+        
+        if session.canAddOutput(metadataOutput) {
+            session.addOutput(metadataOutput)
+            
+            metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+            metadataOutput.metadataObjectTypes = [.qr, .ean13, .ean8, .upce]
+        } else {
+            displayErrorAlert(message: "Unable to add metadata output.")
+        }
+    }
+    
+    private func setupPreviewLayer(session: AVCaptureSession) {
+        previewLayer = AVCaptureVideoPreviewLayer(session: session)
         previewLayer.frame = cameraView.bounds
         previewLayer.videoGravity = .resizeAspectFill
         cameraView.layer.addSublayer(previewLayer)
-        
-        DispatchQueue.global().async {
-            self.captureSession.startRunning()
-        }
     }
     
-    private func configureVideoInput() {
-        guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else { return }
-        let videoInput: AVCaptureDeviceInput
-        
-        do {
-            videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
-        } catch {
-            // 적절한 에러 처리를 추가하세요
-            return
-        }
-        
-        if captureSession.canAddInput(videoInput) {
-            captureSession.addInput(videoInput)
-        } else {
-            // 적절한 에러 처리를 추가하세요
-            return
-        }
+    private func displayErrorAlert(message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
     }
     
-    private func configureMetadataOutput() {
-        let metadataOutput = AVCaptureMetadataOutput()
-        if captureSession.canAddOutput(metadataOutput) {
-            captureSession.addOutput(metadataOutput)
-            
-            metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-            metadataOutput.metadataObjectTypes = [.qr, .ean13, .ean8, .upce] // 필요한 타입을 여기에 추가하세요
-        } else {
-            // 적절한 에러 처리를 추가하세요
-            return
-        }
-    }
+    
+    
+    
     
     // MARK: - Helper Methods
     private func displayKickboardInfo() {
@@ -160,19 +182,19 @@ extension KickBoardRegisterViewController: AVCaptureMetadataOutputObjectsDelegat
         
         isAlertShown = true
         
-        DispatchQueue.global().async {
-            self.captureSession.stopRunning() // 백그라운드 스레드에서 호출
+        DispatchQueue.main.async { // 메인 스레드에서 실행
+            self.captureSession?.stopRunning()
         }
         
-        if let kickboardInfo = kickboardInfo, code == "12345-abcde-67890" {
+        if let kickboardInfo = kickboardInfo, code == kickboardInfo.uniqueID {
             // 킥보드 정보 표시
             let alert = UIAlertController(title: "Success", message: "대여 완료!", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
                 self.isAlertShown = false
-                DispatchQueue.global().async {
-                    self.captureSession.startRunning() // 백그라운드 스레드에서 호출
+                DispatchQueue.main.async { // 메인 스레드에서 실행
+                    self.captureSession?.startRunning()
+                    self.dismiss(animated: true, completion: nil)
                 }
-                self.dismiss(animated: true, completion: nil)
             }))
             self.present(alert, animated: true, completion: nil)
         } else {
@@ -181,13 +203,14 @@ extension KickBoardRegisterViewController: AVCaptureMetadataOutputObjectsDelegat
             let alert = UIAlertController(title: "Error", message: "킥보드 정보가 일치하지 않습니다.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
                 self.isAlertShown = false // 얼럿이 닫힐 때 플래그를 리셋하고 캡처 세션을 다시 시작
-                DispatchQueue.global().async {
-                    self.captureSession.startRunning() // 백그라운드 스레드에서 호출
+                DispatchQueue.main.async { // 메인 스레드에서 실행
+                    self.captureSession?.startRunning()
                 }
             }))
             self.present(alert, animated: true, completion: nil)
         }
     }
+    
     
     
     
