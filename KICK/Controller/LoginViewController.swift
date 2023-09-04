@@ -88,8 +88,13 @@ class LoginViewController: UIViewController  {
     
     @objc func logInButtonTapped() {
         print("버튼")
-        // 로그인 버튼이 탭되었을 때 수행할 작업을 이곳에 구현합니다.
-        // 예를 들어, 로그인 화면을 표시하거나 로그인 프로세스를 시작할 수 있습니다.
+        let storyboard = UIStoryboard(name: "MainTabBar", bundle: nil)
+        if let tabBarController = storyboard.instantiateViewController(withIdentifier: "TabBarController") as? TabBarController {
+            tabBarController.modalPresentationStyle = .fullScreen
+            self.present(tabBarController, animated: true) {
+                self.navigationController?.viewControllers.remove(at: 0)
+            }
+        }
     }
     
     
@@ -141,6 +146,8 @@ class LoginViewController: UIViewController  {
             make.trailing.equalToSuperview()
         }
         
+        logInButton.addTarget(self, action: #selector(logInButtonTapped), for: .touchUpInside)
+
 //        logInButton.snp.makeConstraints { make in
 //            //make.top.equalTo(idLabel).offset(30)
 //            //make.bottom.equalTo(passwordLabel).offset(30)
@@ -181,14 +188,14 @@ class LoginViewController: UIViewController  {
         }
     }
     
-    @IBAction func testButton(_ sender: UIButton) {
-        
-        let storyboard = UIStoryboard(name: "MainTabBar", bundle: nil)
-        if let tabBarController = storyboard.instantiateViewController(withIdentifier: "TabBarController") as? TabBarController {
-            tabBarController.modalPresentationStyle = .fullScreen
-            self.present(tabBarController, animated: true) {
-                self.navigationController?.viewControllers.remove(at: 0)
-            }
-        }
-    }
+//    @IBAction func testButton(_ sender: UIButton) {
+//
+//        let storyboard = UIStoryboard(name: "MainTabBar", bundle: nil)
+//        if let tabBarController = storyboard.instantiateViewController(withIdentifier: "TabBarController") as? TabBarController {
+//            tabBarController.modalPresentationStyle = .fullScreen
+//            self.present(tabBarController, animated: true) {
+//                self.navigationController?.viewControllers.remove(at: 0)
+//            }
+//        }
+//    }
 }
