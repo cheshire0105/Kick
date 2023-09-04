@@ -22,6 +22,7 @@
 		FF557F372AA56A4500C9CAEC /* KickBoardRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF557F362AA56A4500C9CAEC /* KickBoardRegisterViewController.swift */; };
 		FF557F392AA56A6E00C9CAEC /* MypageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF557F382AA56A6E00C9CAEC /* MypageViewController.swift */; };
 		FF557F3E2AA56FCD00C9CAEC /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF557F3D2AA56FCD00C9CAEC /* TabBarController.swift */; };
+		FFDAD66D2AA5B11D00FCCEAB /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDAD66C2AA5B11D00FCCEAB /* Manager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		FF557F362AA56A4500C9CAEC /* KickBoardRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KickBoardRegisterViewController.swift; sourceTree = "<group>"; };
 		FF557F382AA56A6E00C9CAEC /* MypageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageViewController.swift; sourceTree = "<group>"; };
 		FF557F3D2AA56FCD00C9CAEC /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		FFDAD66C2AA5B11D00FCCEAB /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				FF006F532AA58CEF00A3CB8A /* Model.swift */,
+				FFDAD66C2AA5B11D00FCCEAB /* Manager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -200,6 +203,7 @@
 				FF557F3E2AA56FCD00C9CAEC /* TabBarController.swift in Sources */,
 				FF557F372AA56A4500C9CAEC /* KickBoardRegisterViewController.swift in Sources */,
 				FF557F192AA5695B00C9CAEC /* SceneDelegate.swift in Sources */,
+				FFDAD66D2AA5B11D00FCCEAB /* Manager.swift in Sources */,
 				FF006F542AA58CEF00A3CB8A /* Model.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
