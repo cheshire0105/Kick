@@ -12,17 +12,57 @@
         <!--Kick Board Register View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController id="Y6W-OH-hqX" customClass="KickBoardRegisterViewController" customModule="KICK" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="KickBoardRegisterViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="KickBoardRegisterViewController" customModule="KICK" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6HC-nj-i4q">
+                                <rect key="frame" x="20" y="69" width="353" height="350"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="350" id="GPB-Ow-qeN"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iWS-CS-qP1">
+                                <rect key="frame" x="10" y="429" width="373" height="300"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="kickboardInfoLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lu0-Yf-4bG">
+                                        <rect key="frame" x="15" y="18" width="350" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="k8l-4E-UGL"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="iWS-CS-qP1" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="2hr-un-IL4"/>
+                            <constraint firstItem="iWS-CS-qP1" firstAttribute="top" secondItem="6HC-nj-i4q" secondAttribute="bottom" constant="10" id="4cZ-xf-N4g"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="6HC-nj-i4q" secondAttribute="trailing" constant="20" id="CBv-Ts-f2f"/>
+                            <constraint firstItem="6HC-nj-i4q" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="CTb-RW-2ol"/>
+                            <constraint firstItem="6HC-nj-i4q" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="10" id="lAO-Uw-QOW"/>
+                            <constraint firstItem="6HC-nj-i4q" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="sy4-8r-UCw"/>
+                            <constraint firstItem="iWS-CS-qP1" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="10" id="xA9-9x-reH"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="iWS-CS-qP1" secondAttribute="trailing" constant="10" id="yf9-8s-dqs"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="cameraView" destination="6HC-nj-i4q" id="twp-3l-o3i"/>
+                        <outlet property="infoView" destination="iWS-CS-qP1" id="5NH-rW-krD"/>
+                        <outlet property="kickboardInfoLabel" destination="lu0-Yf-4bG" id="UyW-WL-LNY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="139" y="-2"/>
+            <point key="canvasLocation" x="148.85496183206106" y="-8.4507042253521139"/>
         </scene>
     </scenes>
     <resources>

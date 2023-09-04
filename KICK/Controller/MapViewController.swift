@@ -9,21 +9,20 @@ import UIKit
 
 class MapViewController: UIViewController {
 
+    @IBAction func buttonTapped(_ sender: UIButton) {
+          
+           let storyboard = UIStoryboard(name: "KickBoardRegister", bundle: nil)
+         
+           if let kickBoardRegisterVC = storyboard.instantiateViewController(withIdentifier: "KickBoardRegisterViewController") as? KickBoardRegisterViewController {
+               self.present(kickBoardRegisterVC, animated: true, completion: nil)
+           }
+       }
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
 
 }
