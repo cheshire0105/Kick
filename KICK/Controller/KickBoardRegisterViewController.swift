@@ -46,7 +46,7 @@ class KickBoardRegisterViewController: UIViewController {
         rentedKickboardID = dummyKickboardID
         
         updateRentReturnButton(isRented: false)
-        updateKickboardInfoLabels(kickboardID: dummyKickboardID, returnInfo: "Sample Return Info", batteryInfo: "100%")
+        updateKickboardInfoLabels(kickboardID: dummyKickboardID, returnInfo: "Sample Return Info", batteryInfo: 100) // 여기에서 배터리 정보를 Int로 전달
     }
     
     func updateRentReturnButton(isRented: Bool) {
@@ -57,12 +57,13 @@ class KickBoardRegisterViewController: UIViewController {
         }
     }
     
-    func updateKickboardInfoLabels(kickboardID: String, returnInfo: String, batteryInfo: String) {
+    func updateKickboardInfoLabels(kickboardID: String, returnInfo: String, batteryInfo: Int) {
         // 더미 데이터로 레이블 업데이트
         kickboardInfoLabel.text = "Kickboard ID: \(kickboardID)"
         returnInfoLabel.text = "Return Info: \(returnInfo)"
-        batteryInfoLabel.text = "Battery Info: \(batteryInfo)"
+        batteryInfoLabel.text = "Battery Info: \(batteryInfo)%"
     }
+
     
     @IBAction func rentReturnButtonTapped(_ sender: UIButton) {
         guard let kickboardID = rentedKickboardID else {
@@ -74,7 +75,10 @@ class KickBoardRegisterViewController: UIViewController {
             kickboard.isRented.toggle()
             UserDefaultsManager.shared.saveKickboard(kickboard: kickboard)
             updateRentReturnButton(isRented: kickboard.isRented)
-            updateKickboardInfoLabels(kickboardID: kickboard.uniqueID, returnInfo: "Sample Return Info", batteryInfo: "100%")
+            
+            // 이 부분에서 실제 배터리 수준 정보를 가져와야 함. 현재는 더미 값으로 설정됨
+            let batteryLevel = 100
+            updateKickboardInfoLabels(kickboardID: kickboard.uniqueID, returnInfo: "Sample Return Info", batteryInfo: batteryLevel)
         } else {
             showAlert(title: "Error", message: "Kickboard not found")
         }
