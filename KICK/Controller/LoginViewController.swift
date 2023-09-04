@@ -18,8 +18,15 @@ class LoginViewController: UIViewController {
     
     @IBAction func testButton(_ sender: UIButton) {
         
-        performSegue(withIdentifier: "TabBarController", sender: self)
+        let storyboard = UIStoryboard(name: "MainTabBar", bundle: nil)
+                if let tabBarController = storyboard.instantiateViewController(withIdentifier: "TabBarController") as? TabBarController {
+                    tabBarController.modalPresentationStyle = .fullScreen
+                    self.present(tabBarController, animated: true) {
+                        self.navigationController?.viewControllers.remove(at: 0) 
+                    }
+                }
         
+
     }
     
  

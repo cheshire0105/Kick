@@ -94,8 +94,8 @@
 		FF557F3B2AA56A9000C9CAEC /* View */ = {
 			isa = PBXGroup;
 			children = (
-				FF557F1C2AA5695B00C9CAEC /* MainTabBar.storyboard */,
 				FF557F2A2AA569AC00C9CAEC /* Login.storyboard */,
+				FF557F1C2AA5695B00C9CAEC /* MainTabBar.storyboard */,
 				FF557F2C2AA569CB00C9CAEC /* Map.storyboard */,
 				FF557F2E2AA569DC00C9CAEC /* Mypage.storyboard */,
 				FF557F302AA56A0000C9CAEC /* KickBoardRegister.storyboard */,
