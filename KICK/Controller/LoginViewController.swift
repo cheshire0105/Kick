@@ -11,7 +11,7 @@ import SnapKit
 
 class LoginViewController: UIViewController  {
     
-    
+    //test
     private let accountInputView = UIView()
     
     private let logoImageView = {
