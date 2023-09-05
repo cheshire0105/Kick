@@ -7,33 +7,6 @@
 
 import UIKit
 import SnapKit
-import SwiftUI
-
-import SwiftUI
-
-extension UIViewController {
-    private struct Preview: UIViewControllerRepresentable {
-        let viewController: UIViewController
-        
-        func makeUIViewController(context: Context) -> UIViewController {
-            return viewController
-        }
-        
-        func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
-        }
-    }
-    
-    func toPreview() -> some View {
-        Preview(viewController: self)
-    }
-}
-
-struct MyViewController_PreViews: PreviewProvider {
-    static var previews: some View {
-        SignUpViewController().toPreview()
-    }
-}
-
 
 class SignUpViewController: UIViewController {
 
@@ -41,58 +14,75 @@ class SignUpViewController: UIViewController {
     
     private let logoImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "")
-    }
-    
-    private let makingIdLabel = {
-        let label = UILabel()
-        label.layer.masksToBounds = true
-        label.layer.cornerRadius = 10
-        label.text = "New ID"
-        label.textColor = UIColor.black
-        label.backgroundColor = UIColor.white
-        label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.textAlignment = .center
-        return label
+        imageView.image = UIImage(named: "logoImage")
+        return imageView
     }()
     
-    private let makingPasswordLabel = {
-        let label = UILabel()
-        label.layer.masksToBounds = true
-        label.layer.cornerRadius = 10
-        label.text = "new password"
-        label.textColor = UIColor.black
-        label.backgroundColor = UIColor.white
-        label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.textAlignment = .center
-        return label
+    private let makingIdTextField = {
+        let textField = UITextField()
+        textField.layer.masksToBounds = true
+        textField.layer.cornerRadius = 10
+        textField.placeholder = "New ID"
+        textField.textColor = UIColor.black
+        textField.backgroundColor = UIColor.white
+        textField.font = UIFont.boldSystemFont(ofSize: 18)
+        textField.textAlignment = .center
+        textField.layer.borderColor = UIColor.red.cgColor
+        textField.layer.borderWidth = 1.0
+        textField.layer.shadowColor = UIColor.red.cgColor
+        textField.layer.shadowOffset = CGSize(width: 10, height: 10)
+        textField.layer.shadowOpacity = 1
+        textField.layer.shadowRadius = 10.0
+        return textField
     }()
     
-    private let checkingPasswordLabel = {
-        let label = UILabel()
-        label.layer.masksToBounds = true
-        label.layer.cornerRadius = 10
-        label.text = "check password"
-        label.textColor = UIColor.black
-        label.backgroundColor = UIColor.white
-        label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.textAlignment = .center
-        return label
+    private let makingPasswordTextField = {
+        let textField = UITextField()
+        textField.layer.masksToBounds = true
+        textField.layer.cornerRadius = 10
+        textField.placeholder = "new password"
+        textField.textColor = UIColor.black
+        textField.backgroundColor = UIColor.white
+        textField.font = UIFont.boldSystemFont(ofSize: 18)
+        textField.textAlignment = .center
+        textField.layer.borderColor = UIColor.red.cgColor
+        textField.layer.borderWidth = 1.0
+        return textField
+    }()
+    
+    private let checkingPasswordTextField = {
+        let textField = UITextField()
+        textField.layer.masksToBounds = true
+        textField.layer.cornerRadius = 10
+        textField.placeholder = "check password"
+        textField.textColor = UIColor.black
+        textField.backgroundColor = UIColor.white
+        textField.font = UIFont.boldSystemFont(ofSize: 18)
+        textField.textAlignment = .center
+        textField.layer.borderColor = UIColor.red.cgColor
+        textField.layer.borderWidth = 1.0
+        return textField
     }()
     
     private let okButton = {
         let button = UIButton()
+        button.layer.cornerRadius = 10
         button.setTitle("OK", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
-        button.backgroundColor = UIColor.white
+        button.backgroundColor = .cyan
+        button.layer.borderColor = UIColor.black.cgColor
+        button.layer.borderWidth = 2.0
         return button
     }()
     
     private let cancelButton = {
         let button = UIButton()
+        button.layer.cornerRadius = 10
         button.setTitle("cancel", for: .normal)
-        button.setTitleColor(UIColor.black, for: .normal)
-        button.backgroundColor = UIColor.white
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.backgroundColor = UIColor.systemPink
+        button.layer.borderColor = UIColor.black.cgColor
+        button.layer.borderWidth = 2.0
         return button
     }()
     
@@ -100,19 +90,71 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .green
+        view.backgroundColor = .white
         configureMakingAccountInputView()
+        configureLayout()
     }
     
 /*------------------------------------*/
 
     func configureMakingAccountInputView () {
 
-        for subview in [ makingIdLabel, makingPasswordLabel, checkingPasswordLabel, okButton, cancelButton ] {
+        for subview in [ makingIdTextField, makingPasswordTextField, checkingPasswordTextField, okButton, cancelButton ] {
             makingAccountInputView.addSubview(subview)
         }
     }
 
+    func configureLayout () {
+
+        for subview in [
+            logoImageView, makingIdTextField, makingPasswordTextField, checkingPasswordTextField, okButton, cancelButton ] {
+            view.addSubview(subview)
+        }
+        
+        logoImageView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview().offset(-100)
+                make.width.equalTo(300)
+                make.height.equalTo(250)
+        }
+        
+        makingIdTextField.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview().offset(130)
+            make.width.equalTo(200)
+            make.height.equalTo(40)
+        }
+        
+        makingPasswordTextField.snp.makeConstraints{ make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview().offset(180)
+            make.width.equalTo(200)
+            make.height.equalTo(40)
+        }
+        
+        checkingPasswordTextField.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview().offset(230)
+            make.width.equalTo(200)
+            make.height.equalTo(40)
+        }
+        
+        
+        okButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview().offset(300)
+            make.width.equalTo(250)
+            make.height.equalTo(40)
+        }
+        
+        cancelButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview().offset(350)
+            make.width.equalTo(250)
+            make.height.equalTo(40)
+            
+        }
+    }
     
     
     
