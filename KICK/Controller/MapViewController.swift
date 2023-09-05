@@ -5,6 +5,8 @@ import NMapsMap
 
 class MapViewController: UIViewController, NMFMapViewOptionDelegate  {
     
+    let button = UIButton() 
+    
     // Properties
     private let registerButton = {
         let button = UIButton()
