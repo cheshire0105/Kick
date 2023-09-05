@@ -102,6 +102,9 @@ class SignUpViewController: UIViewController {
         for subview in [ makingIdTextField, makingPasswordTextField, checkingPasswordTextField, okButton, cancelButton ] {
             makingAccountInputView.addSubview(subview)
         }
+        
+        cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
+
     }
 
     func configureLayout () {
@@ -157,6 +160,11 @@ class SignUpViewController: UIViewController {
     }
     
     
+    
+    
+    @objc func cancelButtonTapped() {
+        self.dismiss(animated: true, completion: nil)
+    }
     
 
 }
