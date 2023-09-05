@@ -7,26 +7,33 @@
 
 import UIKit
 import SnapKit
+import NMapsMap
 
 class MapViewController: UIViewController {
     
     // Properties
-    private let registerButton = UIButton(type: .system)
-    private let mapView = NMFMapView() 
+    private let registerButton = {
+        let button = UIButton()
+        button.setBackgroundImage(UIImage(systemName: "rectangle.fill"), for: .normal)
+        button.addTarget(MapViewController.self, action: #selector(registerButtonAction), for: .touchUpInside)
+        return button
+    }()
     
+    private let mapView = NMFNaverMapView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
 
         configureLayout()
-        registerButton.setBackgroundImage(UIImage(systemName: "rectangle.fill"), for: .normal)
-        registerButton.addTarget(self, action: #selector(registerButtonAction), for: .touchUpInside)
     }
     
     func configureLayout() {
+        view.addSubview(mapView)
         view.addSubview(registerButton)
+        
+        mapView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
         
         registerButton.snp.makeConstraints{ make in
             make.height.equalTo(50)
@@ -43,8 +50,5 @@ class MapViewController: UIViewController {
             self.present(kickBoardRegisterVC, animated: true, completion: nil)
         }
     }
-    
-
-    
 
 }
