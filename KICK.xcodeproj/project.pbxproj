@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1FF7A02C2AA6B0260010D428 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF7A02B2AA6B0260010D428 /* SignUpViewController.swift */; };
 		AB8AF33F2AA5BD5D009A5644 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = AB8AF33E2AA5BD5D009A5644 /* SnapKit */; };
 		FF006F542AA58CEF00A3CB8A /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF006F532AA58CEF00A3CB8A /* Model.swift */; };
 		FF36A79A2AA5F00800980717 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF36A7992AA5F00800980717 /* UserManager.swift */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1FF7A02B2AA6B0260010D428 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		FF006F532AA58CEF00A3CB8A /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		FF36A7992AA5F00800980717 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		FF557F132AA5695B00C9CAEC /* KICK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KICK.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -61,6 +63,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1FF7A02A2AA6AFF50010D428 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				FF557F322AA56A2000C9CAEC /* LoginViewController.swift */,
+				1FF7A02B2AA6B0260010D428 /* SignUpViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		FF557F0A2AA5695B00C9CAEC = {
 			isa = PBXGroup;
 			children = (
@@ -117,8 +128,8 @@
 		FF557F3C2AA56A9B00C9CAEC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1FF7A02A2AA6AFF50010D428 /* Login */,
 				FF557F3D2AA56FCD00C9CAEC /* TabBarController.swift */,
-				FF557F322AA56A2000C9CAEC /* LoginViewController.swift */,
 				FF557F342AA56A2A00C9CAEC /* MapViewController.swift */,
 				FF557F382AA56A6E00C9CAEC /* MypageViewController.swift */,
 				FF557F362AA56A4500C9CAEC /* KickBoardRegisterViewController.swift */,
@@ -207,6 +218,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FF7A02C2AA6B0260010D428 /* SignUpViewController.swift in Sources */,
 				FF557F332AA56A2000C9CAEC /* LoginViewController.swift in Sources */,
 				FF557F392AA56A6E00C9CAEC /* MypageViewController.swift in Sources */,
 				FF557F172AA5695B00C9CAEC /* AppDelegate.swift in Sources */,
