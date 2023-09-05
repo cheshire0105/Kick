@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1FF7A02C2AA6B0260010D428 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF7A02B2AA6B0260010D428 /* SignUpViewController.swift */; };
 		AB8AF33F2AA5BD5D009A5644 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = AB8AF33E2AA5BD5D009A5644 /* SnapKit */; };
 		BB25743B2CA2DBEF43BC142C /* Pods_KICK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 968FB9DA8EBA99339B012061 /* Pods_KICK.framework */; };
 		FF006F542AA58CEF00A3CB8A /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF006F532AA58CEF00A3CB8A /* Model.swift */; };
@@ -32,6 +33,7 @@
 		4F8E136C82DD1A605B7DC3FB /* Pods-KICK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KICK.release.xcconfig"; path = "Target Support Files/Pods-KICK/Pods-KICK.release.xcconfig"; sourceTree = "<group>"; };
 		968FB9DA8EBA99339B012061 /* Pods_KICK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KICK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D77E8CB7C69D35ED06B6C6EF /* Pods-KICK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KICK.debug.xcconfig"; path = "Target Support Files/Pods-KICK/Pods-KICK.debug.xcconfig"; sourceTree = "<group>"; };
+		1FF7A02B2AA6B0260010D428 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		FF006F532AA58CEF00A3CB8A /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		FF36A7992AA5F00800980717 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		FF557F132AA5695B00C9CAEC /* KICK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KICK.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,6 +83,13 @@
 				968FB9DA8EBA99339B012061 /* Pods_KICK.framework */,
 			);
 			name = Frameworks;
+		1FF7A02A2AA6AFF50010D428 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				FF557F322AA56A2000C9CAEC /* LoginViewController.swift */,
+				1FF7A02B2AA6B0260010D428 /* SignUpViewController.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		FF557F0A2AA5695B00C9CAEC = {
@@ -141,8 +150,8 @@
 		FF557F3C2AA56A9B00C9CAEC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1FF7A02A2AA6AFF50010D428 /* Login */,
 				FF557F3D2AA56FCD00C9CAEC /* TabBarController.swift */,
-				FF557F322AA56A2000C9CAEC /* LoginViewController.swift */,
 				FF557F342AA56A2A00C9CAEC /* MapViewController.swift */,
 				FF557F382AA56A6E00C9CAEC /* MypageViewController.swift */,
 				FF557F362AA56A4500C9CAEC /* KickBoardRegisterViewController.swift */,
@@ -275,6 +284,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FF7A02C2AA6B0260010D428 /* SignUpViewController.swift in Sources */,
 				FF557F332AA56A2000C9CAEC /* LoginViewController.swift in Sources */,
 				FF557F392AA56A6E00C9CAEC /* MypageViewController.swift in Sources */,
 				FF557F172AA5695B00C9CAEC /* AppDelegate.swift in Sources */,
