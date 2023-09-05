@@ -19,23 +19,37 @@ class MapViewController: UIViewController, NMFMapViewOptionDelegate  {
         return button
     }()
     
-    private let mapView = NMFNaverMapView()
-
+    private let mapView = NMFMapView()
+    private let naverMapView = NMFNaverMapView()
+    
+    private let positionButton = {
+        let button = NMFLocationButton()
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         configureMap()
         configureLayout()
     }
     
     func configureMap() {
-        /* 현 위치 추적 활성화 */
-        mapView.showLocationButton = true
+
     }
     
     func configureLayout() {
         view.addSubview(mapView)
         view.addSubview(registerButton)
+        
+        positionButton.mapView = naverMapView.mapView
+        view.addSubview(positionButton)
+        
+        positionButton.snp.makeConstraints { make in
+            make.trailing.equalTo(registerButton.snp.trailing).offset(-10)
+            make.bottom.equalTo(registerButton.snp.top).offset(-10)
+            
+        }
         
         mapView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -51,12 +65,12 @@ class MapViewController: UIViewController, NMFMapViewOptionDelegate  {
     
     @objc func registerButtonAction() {
         let storyboard = UIStoryboard(name: "KickBoardRegister", bundle: nil)
-      
+        
         if let kickBoardRegisterVC = storyboard.instantiateViewController(withIdentifier: "KickBoardRegisterViewController") as? KickBoardRegisterViewController {
             self.present(kickBoardRegisterVC, animated: true, completion: nil)
         }
     }
-
+    
 }
 
 
