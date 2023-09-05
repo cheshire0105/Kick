@@ -12,17 +12,89 @@
         <!--Kick Board Register View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController id="Y6W-OH-hqX" customClass="KickBoardRegisterViewController" customModule="KICK" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="KickBoardRegisterViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="KickBoardRegisterViewController" customModule="KICK" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6HC-nj-i4q">
+                                <rect key="frame" x="20" y="69" width="353" height="350"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="350" id="GPB-Ow-qeN"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iWS-CS-qP1">
+                                <rect key="frame" x="10" y="429" width="373" height="200"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="34" translatesAutoresizingMaskIntoConstraints="NO" id="VlJ-Mi-rLj">
+                                        <rect key="frame" x="10" y="10" width="353" height="180"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="kickboardInfoLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lu0-Yf-4bG">
+                                                <rect key="frame" x="0.0" y="0.0" width="353" height="37.333333333333336"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="rentalInfoLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Th-nx-HRh">
+                                                <rect key="frame" x="0.0" y="71.333333333333314" width="353" height="37.333333333333343"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="batteryInfoLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Dv-6e-pDa">
+                                                <rect key="frame" x="0.0" y="142.66666666666663" width="353" height="37.333333333333343"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="OMh-qJ-3os"/>
+                                    <constraint firstItem="VlJ-Mi-rLj" firstAttribute="top" secondItem="iWS-CS-qP1" secondAttribute="top" constant="10" id="YZf-2G-JIU"/>
+                                    <constraint firstAttribute="trailing" secondItem="VlJ-Mi-rLj" secondAttribute="trailing" constant="10" id="iQG-fi-P2p"/>
+                                    <constraint firstAttribute="bottom" secondItem="VlJ-Mi-rLj" secondAttribute="bottom" constant="10" id="pdF-Xd-b5E"/>
+                                    <constraint firstItem="VlJ-Mi-rLj" firstAttribute="leading" secondItem="iWS-CS-qP1" secondAttribute="leading" constant="10" id="phE-k0-d0D"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9rf-bH-nE7">
+                                <rect key="frame" x="100" y="699" width="193" height="34.333333333333371"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="대여 시작"/>
+                                <connections>
+                                    <action selector="rentReturnButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="9eK-b5-QXo"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="9rf-bH-nE7" firstAttribute="top" secondItem="iWS-CS-qP1" secondAttribute="bottom" constant="70" id="0Px-pZ-ayF"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="9rf-bH-nE7" secondAttribute="trailing" constant="100" id="8CM-22-rz1"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="6HC-nj-i4q" secondAttribute="trailing" constant="20" id="CBv-Ts-f2f"/>
+                            <constraint firstItem="6HC-nj-i4q" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="CTb-RW-2ol"/>
+                            <constraint firstItem="9rf-bH-nE7" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="100" id="IFZ-MD-XkN"/>
+                            <constraint firstItem="6HC-nj-i4q" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="10" id="lAO-Uw-QOW"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="iWS-CS-qP1" secondAttribute="trailing" constant="10" id="mCM-EX-GbI"/>
+                            <constraint firstItem="iWS-CS-qP1" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="10" id="slP-yV-GXC"/>
+                            <constraint firstItem="6HC-nj-i4q" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="sy4-8r-UCw"/>
+                            <constraint firstItem="iWS-CS-qP1" firstAttribute="top" secondItem="6HC-nj-i4q" secondAttribute="bottom" constant="10" id="zA3-S2-VwW"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="batteryInfoLabel" destination="0Dv-6e-pDa" id="Zr7-us-tOG"/>
+                        <outlet property="cameraView" destination="6HC-nj-i4q" id="GXa-MO-YYn"/>
+                        <outlet property="kickboardInfoLabel" destination="lu0-Yf-4bG" id="jyY-sH-4BJ"/>
+                        <outlet property="rentReturnButton" destination="9rf-bH-nE7" id="aA0-5k-xlp"/>
+                        <outlet property="returnInfoLabel" destination="3Th-nx-HRh" id="Sdr-mM-2Gc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="139" y="-2"/>
+            <point key="canvasLocation" x="-83.206106870229007" y="-14.788732394366198"/>
         </scene>
     </scenes>
     <resources>
