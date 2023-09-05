@@ -8,10 +8,8 @@
 import UIKit
 import SnapKit
 
-
 class LoginViewController: UIViewController  {
     
-    //test
     private let accountInputView = UIView()
     
     private let logoImageView = {
@@ -23,9 +21,11 @@ class LoginViewController: UIViewController  {
     
     private let idLabel = {
         let label = UILabel()
-        label.text = "I D"
+        label.layer.masksToBounds = true
+        label.layer.cornerRadius = 10
+        label.text = "  ID  "
         label.textColor = UIColor.black
-        label.backgroundColor = UIColor.systemBlue
+        label.backgroundColor = UIColor.white
         label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textAlignment = .center
         return label
@@ -33,18 +33,24 @@ class LoginViewController: UIViewController  {
     
     private let idTextField = {
         let textField = UITextField()
+        textField.layer.cornerRadius = 10
         textField.placeholder = "아이디를 입력해보세요!"
         textField.textColor = UIColor.black
-        textField.backgroundColor = UIColor.cyan
+        textField.backgroundColor = UIColor.white
         textField.font = UIFont.boldSystemFont(ofSize: 18)
+        textField.textAlignment = .center
+        textField.layer.borderColor = UIColor.red.cgColor
+        textField.layer.borderWidth = 1.0
         return textField
     }()
     
     private let passwordLabel = {
         let label = UILabel()
-        label.text = "password"
+        label.layer.masksToBounds = true
+        label.layer.cornerRadius = 10
+        label.text = "  PW  "
         label.textColor = UIColor.black
-        label.backgroundColor = UIColor.systemBlue
+        label.backgroundColor = UIColor.white
         label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textAlignment = .center
         return label
@@ -52,51 +58,51 @@ class LoginViewController: UIViewController  {
     
     private let passwordTextField = {
         let textField = UITextField()
+        textField.layer.cornerRadius = 10
         textField.placeholder = "비밀번호를 입력해보세요!"
         textField.textColor = UIColor.black
-        textField.backgroundColor = UIColor.cyan
+        textField.backgroundColor = UIColor.white
         textField.font = UIFont.boldSystemFont(ofSize: 18)
+        textField.textAlignment = .center
+        textField.layer.borderColor = UIColor.red.cgColor
+        textField.layer.borderWidth = 1.0
         return textField
     }()
     
     private let logInButton = {
         let button = UIButton()
-        button.titleLabel?.text = "로그인"
-        button.setTitleColor(UIColor.white, for: .normal)
-        button.backgroundColor = UIColor.black
+        button.setTitle("로그인", for: .normal)
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.backgroundColor = .cyan
+        button.layer.borderColor = UIColor.black.cgColor
+        button.layer.borderWidth = 2.0
         return button
     }()
     
     private let signUpButton = {
         let button = UIButton()
-        button.titleLabel?.text = "회원가입"
-        button.setTitleColor(UIColor.white, for: .normal)
-        button.backgroundColor = UIColor.black
+        button.setTitle("회원가입", for: .normal)
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.backgroundColor = .cyan
+        button.layer.borderColor = UIColor.black.cgColor
+        button.layer.borderWidth = 2.0
         return button
     }()
     
     
-    
-    
-    
-    
-/*--------------------------------------------------------*/
-    
-    
+    /*--------------------------------------------------------*/
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       
-        
+        view.backgroundColor = .green
         configureAccountInputView()
         configureLayout()
+        buttonClick()
     }
     
-    
-    
-    
-/*--------------------------------------------------------*/
+
+    /*--------------------------------------------------------*/
     func configureAccountInputView () {
         
         for subview in [idLabel, idTextField, passwordLabel, passwordTextField, logInButton, signUpButton] {
@@ -108,24 +114,27 @@ class LoginViewController: UIViewController  {
             make.top.equalToSuperview()
             make.trailing.equalTo(passwordLabel)
         }
-        
+
         passwordLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview()
             make.top.equalTo(idLabel.snp.bottom).offset(5)
             make.trailing.equalTo(idLabel)
         }
-        
+
         idTextField.snp.makeConstraints { make in
             make.leading.equalTo(idLabel.snp.trailing).offset(5)
             make.top.equalToSuperview()
             make.trailing.equalToSuperview()
         }
-        
+
         passwordTextField.snp.makeConstraints { make in
             make.leading.equalTo(passwordLabel.snp.trailing).offset(5)
             make.top.equalTo(idLabel.snp.bottom).offset(5)
             make.trailing.equalToSuperview()
         }
+        
+        
+
     }
     
     func configureLayout () {
@@ -142,26 +151,29 @@ class LoginViewController: UIViewController  {
         }
         
         accountInputView.snp.makeConstraints { make in
-            make.top.equalTo(logoImageView.snp.bottom).offset(20)
+            make.top.equalTo(logoImageView.snp.bottom).offset(50)
             make.leading.equalToSuperview().offset(20)
-           
+            
         }
         
         logInButton.snp.makeConstraints { make in
             make.leading.equalTo(accountInputView.snp.trailing).offset(5)
             make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-20)
             make.top.equalTo(accountInputView)
-            make.bottom.equalTo(accountInputView)
-        
+            make.bottom.equalTo(signUpButton.snp.top).offset(-20)
+            
         }
         
         signUpButton.snp.makeConstraints { make in
-
+            make.top.equalTo(logInButton.snp.bottom).offset(20)
+            make.leading.equalToSuperview().offset(260)
+            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-20)
         }
     }
     
-    @IBAction func testButton(_ sender: UIButton) {
-        
+/*------버튼-----*/
+    @objc func logInButtonClick() {
+        print("로그인 버튼 클릭됨")
         let storyboard = UIStoryboard(name: "MainTabBar", bundle: nil)
         if let tabBarController = storyboard.instantiateViewController(withIdentifier: "TabBarController") as? TabBarController {
             tabBarController.modalPresentationStyle = .fullScreen
@@ -170,4 +182,16 @@ class LoginViewController: UIViewController  {
             }
         }
     }
+    
+    
+    @objc func signUpButtonClick() {
+        let signUpViewController = SignUpViewController()
+        signUpViewController.modalPresentationStyle = .fullScreen
+        present(signUpViewController, animated: true, completion: nil)
+    }
+    func buttonClick () {
+        logInButton.addTarget(self, action: #selector(logInButtonClick), for: .touchUpInside)
+        signUpButton.addTarget(self, action: #selector(signUpButtonClick), for: .touchUpInside)
+    }
+
 }
