@@ -19,6 +19,11 @@ struct User: Codable {
     var usageFee: Int?
     var membershipLevel: MembershipLevel?
     
+    var userName: String?
+    var userContact: String?
+    var userCredit: String?
+    var userLicense: String?
+    
     // 유저가 얼마나 사용 했는지 나타내는 레벨 구조체
     enum MembershipLevel: Int, Codable {
         case high = 3
