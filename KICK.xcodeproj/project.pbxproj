@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1FF7A02C2AA6B0260010D428 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF7A02B2AA6B0260010D428 /* SignUpViewController.swift */; };
+		81955BDC69A116F7D438FF9F /* Pods_KICK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B089597A7189A80A0D9C1B02 /* Pods_KICK.framework */; };
 		AB8AF33F2AA5BD5D009A5644 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = AB8AF33E2AA5BD5D009A5644 /* SnapKit */; };
 		FF006F542AA58CEF00A3CB8A /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF006F532AA58CEF00A3CB8A /* Model.swift */; };
 		FF36A79A2AA5F00800980717 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF36A7992AA5F00800980717 /* UserManager.swift */; };
@@ -30,6 +31,9 @@
 
 /* Begin PBXFileReference section */
 		1FF7A02B2AA6B0260010D428 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		4C6BE8FA72AC6B640ABB9574 /* Pods-KICK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KICK.release.xcconfig"; path = "Target Support Files/Pods-KICK/Pods-KICK.release.xcconfig"; sourceTree = "<group>"; };
+		A8DA9685DDAD710D00540C3D /* Pods-KICK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KICK.debug.xcconfig"; path = "Target Support Files/Pods-KICK/Pods-KICK.debug.xcconfig"; sourceTree = "<group>"; };
+		B089597A7189A80A0D9C1B02 /* Pods_KICK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KICK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF006F532AA58CEF00A3CB8A /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		FF36A7992AA5F00800980717 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		FF557F132AA5695B00C9CAEC /* KICK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KICK.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -57,6 +61,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB8AF33F2AA5BD5D009A5644 /* SnapKit in Frameworks */,
+				81955BDC69A116F7D438FF9F /* Pods_KICK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,11 +77,31 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		3EE80005D193C9F9E6E5FF14 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A8DA9685DDAD710D00540C3D /* Pods-KICK.debug.xcconfig */,
+				4C6BE8FA72AC6B640ABB9574 /* Pods-KICK.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		6C98A43EF9A4972452DD7949 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B089597A7189A80A0D9C1B02 /* Pods_KICK.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		FF557F0A2AA5695B00C9CAEC = {
 			isa = PBXGroup;
 			children = (
 				FF557F152AA5695B00C9CAEC /* KICK */,
 				FF557F142AA5695B00C9CAEC /* Products */,
+				3EE80005D193C9F9E6E5FF14 /* Pods */,
+				6C98A43EF9A4972452DD7949 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -144,9 +169,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FF557F272AA5695D00C9CAEC /* Build configuration list for PBXNativeTarget "KICK" */;
 			buildPhases = (
+				56058BD2F3D433780DF593E0 /* [CP] Check Pods Manifest.lock */,
 				FF557F0F2AA5695B00C9CAEC /* Sources */,
 				FF557F102AA5695B00C9CAEC /* Frameworks */,
 				FF557F112AA5695B00C9CAEC /* Resources */,
+				E6A398044726A70EDAF8DC6E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -185,7 +212,7 @@
 			);
 			mainGroup = FF557F0A2AA5695B00C9CAEC;
 			packageReferences = (
-				AB8AF33D2AA5BD5D009A5644 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				AB8AF33D2AA5BD5D009A5644 /* XCRemoteSwiftPackageReference "SnapKit.git" */,
 			);
 			productRefGroup = FF557F142AA5695B00C9CAEC /* Products */;
 			projectDirPath = "";
@@ -212,6 +239,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		56058BD2F3D433780DF593E0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KICK-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E6A398044726A70EDAF8DC6E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KICK/Pods-KICK-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KICK/Pods-KICK-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KICK/Pods-KICK-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FF557F0F2AA5695B00C9CAEC /* Sources */ = {
@@ -370,6 +439,7 @@
 		};
 		FF557F282AA5695D00C9CAEC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A8DA9685DDAD710D00540C3D /* Pods-KICK.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -402,6 +472,7 @@
 		};
 		FF557F292AA5695D00C9CAEC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4C6BE8FA72AC6B640ABB9574 /* Pods-KICK.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -456,7 +527,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		AB8AF33D2AA5BD5D009A5644 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+		AB8AF33D2AA5BD5D009A5644 /* XCRemoteSwiftPackageReference "SnapKit.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
@@ -469,7 +540,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		AB8AF33E2AA5BD5D009A5644 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = AB8AF33D2AA5BD5D009A5644 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			package = AB8AF33D2AA5BD5D009A5644 /* XCRemoteSwiftPackageReference "SnapKit.git" */;
 			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
