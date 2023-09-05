@@ -40,7 +40,7 @@ class SignUpViewController: UIViewController {
         let textField = UITextField()
         textField.layer.masksToBounds = true
         textField.layer.cornerRadius = 10
-        textField.placeholder = "new password"
+        textField.placeholder = "New Password"
         textField.textColor = UIColor.black
         textField.backgroundColor = UIColor.white
         textField.font = UIFont.boldSystemFont(ofSize: 18)
@@ -54,7 +54,7 @@ class SignUpViewController: UIViewController {
         let textField = UITextField()
         textField.layer.masksToBounds = true
         textField.layer.cornerRadius = 10
-        textField.placeholder = "check password"
+        textField.placeholder = "Check Password"
         textField.textColor = UIColor.black
         textField.backgroundColor = UIColor.white
         textField.font = UIFont.boldSystemFont(ofSize: 18)
@@ -69,6 +69,7 @@ class SignUpViewController: UIViewController {
         button.layer.cornerRadius = 10
         button.setTitle("OK", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         button.backgroundColor = .cyan
         button.layer.borderColor = UIColor.black.cgColor
         button.layer.borderWidth = 2.0
@@ -78,8 +79,9 @@ class SignUpViewController: UIViewController {
     private let cancelButton = {
         let button = UIButton()
         button.layer.cornerRadius = 10
-        button.setTitle("cancel", for: .normal)
+        button.setTitle("CANCEL", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         button.backgroundColor = UIColor.systemPink
         button.layer.borderColor = UIColor.black.cgColor
         button.layer.borderWidth = 2.0
@@ -93,6 +95,7 @@ class SignUpViewController: UIViewController {
         view.backgroundColor = .white
         configureMakingAccountInputView()
         configureLayout()
+        buttonClick()
     }
     
 /*------------------------------------*/
@@ -102,9 +105,6 @@ class SignUpViewController: UIViewController {
         for subview in [ makingIdTextField, makingPasswordTextField, checkingPasswordTextField, okButton, cancelButton ] {
             makingAccountInputView.addSubview(subview)
         }
-        
-        cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
-
     }
 
     func configureLayout () {
@@ -123,21 +123,21 @@ class SignUpViewController: UIViewController {
         
         makingIdTextField.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview().offset(130)
+            make.centerY.equalToSuperview().offset(100)
             make.width.equalTo(200)
             make.height.equalTo(40)
         }
         
         makingPasswordTextField.snp.makeConstraints{ make in
             make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview().offset(180)
+            make.centerY.equalToSuperview().offset(150)
             make.width.equalTo(200)
             make.height.equalTo(40)
         }
         
         checkingPasswordTextField.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview().offset(230)
+            make.centerY.equalToSuperview().offset(200)
             make.width.equalTo(200)
             make.height.equalTo(40)
         }
@@ -145,15 +145,15 @@ class SignUpViewController: UIViewController {
         
         okButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview().offset(300)
-            make.width.equalTo(250)
+            make.centerY.equalToSuperview().offset(270)
+            make.width.equalTo(300)
             make.height.equalTo(40)
         }
         
         cancelButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview().offset(350)
-            make.width.equalTo(250)
+            make.centerY.equalToSuperview().offset(320)
+            make.width.equalTo(300)
             make.height.equalTo(40)
             
         }
@@ -161,10 +161,27 @@ class SignUpViewController: UIViewController {
     
     
     
+/*------버튼-----*/
     
-    @objc func cancelButtonTapped() {
-        self.dismiss(animated: true, completion: nil)
+    @objc func okButtonClick() {
+        print("회원가입 완료 버튼 클릭됨")
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        if let tabBarController = storyboard.instantiateViewController(withIdentifier: "TabBarController") as? TabBarController {
+            tabBarController.modalPresentationStyle = .fullScreen
+            self.present(tabBarController, animated: true) {
+                self.navigationController?.viewControllers.remove(at: 0)
+            }
+        }
     }
     
+    
+    
+    @objc func cancelButtonClick() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    func buttonClick () {
+        cancelButton.addTarget(self, action: #selector(cancelButtonClick), for: .touchUpInside)
+    }
+//    okButton.addTarget(self, action: #selector, for: <#T##UIControl.Event#>)
 
 }

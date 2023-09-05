@@ -38,6 +38,9 @@ class LoginViewController: UIViewController  {
         textField.textColor = UIColor.black
         textField.backgroundColor = UIColor.white
         textField.font = UIFont.boldSystemFont(ofSize: 18)
+        textField.textAlignment = .center
+        textField.layer.borderColor = UIColor.red.cgColor
+        textField.layer.borderWidth = 1.0
         return textField
     }()
     
@@ -60,6 +63,9 @@ class LoginViewController: UIViewController  {
         textField.textColor = UIColor.black
         textField.backgroundColor = UIColor.white
         textField.font = UIFont.boldSystemFont(ofSize: 18)
+        textField.textAlignment = .center
+        textField.layer.borderColor = UIColor.red.cgColor
+        textField.layer.borderWidth = 1.0
         return textField
     }()
     
@@ -67,7 +73,9 @@ class LoginViewController: UIViewController  {
         let button = UIButton()
         button.setTitle("로그인", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
-        button.backgroundColor = UIColor.white
+        button.backgroundColor = .cyan
+        button.layer.borderColor = UIColor.black.cgColor
+        button.layer.borderWidth = 2.0
         return button
     }()
     
@@ -75,18 +83,14 @@ class LoginViewController: UIViewController  {
         let button = UIButton()
         button.setTitle("회원가입", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
-        button.backgroundColor = UIColor.white
+        button.backgroundColor = .cyan
+        button.layer.borderColor = UIColor.black.cgColor
+        button.layer.borderWidth = 2.0
         return button
     }()
     
     
-    
-    
-    
-    
     /*--------------------------------------------------------*/
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,11 +98,10 @@ class LoginViewController: UIViewController  {
         view.backgroundColor = .green
         configureAccountInputView()
         configureLayout()
+        buttonClick()
     }
     
-    
-    
-    
+
     /*--------------------------------------------------------*/
     func configureAccountInputView () {
         
@@ -130,9 +133,7 @@ class LoginViewController: UIViewController  {
             make.trailing.equalToSuperview()
         }
         
-        logInButton.addTarget(self, action: #selector(logInButtonTapped), for: .touchUpInside)
         
-        signUpButton.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
 
     }
     
@@ -170,9 +171,9 @@ class LoginViewController: UIViewController  {
         }
     }
     
-    
-    @objc func logInButtonTapped() {
-        print("버튼")
+/*------버튼-----*/
+    @objc func logInButtonClick() {
+        print("로그인 버튼 클릭됨")
         let storyboard = UIStoryboard(name: "MainTabBar", bundle: nil)
         if let tabBarController = storyboard.instantiateViewController(withIdentifier: "TabBarController") as? TabBarController {
             tabBarController.modalPresentationStyle = .fullScreen
@@ -182,10 +183,15 @@ class LoginViewController: UIViewController  {
         }
     }
     
-    @objc func signUpButtonTapped() {
+    
+    @objc func signUpButtonClick() {
         let signUpViewController = SignUpViewController()
         signUpViewController.modalPresentationStyle = .fullScreen
         present(signUpViewController, animated: true, completion: nil)
     }
-    
+    func buttonClick () {
+        logInButton.addTarget(self, action: #selector(logInButtonClick), for: .touchUpInside)
+        signUpButton.addTarget(self, action: #selector(signUpButtonClick), for: .touchUpInside)
+    }
+
 }
