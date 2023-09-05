@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import NMapsMap
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, NMFMapViewOptionDelegate  {
     
     // Properties
     private let registerButton = {
@@ -24,7 +24,13 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        configureMap()
         configureLayout()
+    }
+    
+    func configureMap() {
+        /* 현 위치 추적 활성화 */
+        mapView.showLocationButton = true
     }
     
     func configureLayout() {
@@ -38,8 +44,8 @@ class MapViewController: UIViewController {
         registerButton.snp.makeConstraints{ make in
             make.height.equalTo(50)
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-10)
-            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).inset(-10)
-            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).inset(10)
+            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-10)
+            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(10)
         }
     }
     
@@ -51,4 +57,12 @@ class MapViewController: UIViewController {
         }
     }
 
+}
+
+
+extension MapViewController: NMFAuthManagerDelegate {
+    /* MNFAuthManagerDelegate, 인증 실패하면 Error 반환 */
+    func authorized(_ state: NMFAuthState, error: Error?) {
+        print("error: ", error!)
+    }
 }
