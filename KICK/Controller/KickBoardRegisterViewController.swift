@@ -38,16 +38,23 @@ class KickBoardRegisterViewController: UIViewController {
         
         cameraView.addSubview(dummyImageView)
     }
-
+    
     
     @objc func handleDummyImageTap() {
-        // 더미 이미지를 탭하면 더미 데이터를 가져와서 레이블에 표시
+        // 더미 이미지를 탭하면 더미 데이터를 생성하고 저장, 그리고 레이블에 표시
         let dummyKickboardID = "12345" // 더미 킥보드 ID
         rentedKickboardID = dummyKickboardID
+
+        // 더미 킥보드 객체 생성
+        let dummyKickboard = Kickboard(uniqueID: dummyKickboardID, isRented: false, batteryLevel: 100)
         
-        updateRentReturnButton(isRented: false)
-        updateKickboardInfoLabels(kickboardID: dummyKickboardID, returnInfo: "Sample Return Info", batteryInfo: 100) // 여기에서 배터리 정보를 Int로 전달
+        // 더미 킥보드 저장
+        KickboardManager.shared.saveKickboard(kickboard: dummyKickboard)
+        
+        updateRentReturnButton(isRented: dummyKickboard.isRented)
+        updateKickboardInfoLabels(kickboardID: dummyKickboard.uniqueID, returnInfo: "Available for Rent", batteryInfo: dummyKickboard.batteryLevel)
     }
+
     
     func updateRentReturnButton(isRented: Bool) {
         if isRented {
@@ -59,34 +66,52 @@ class KickBoardRegisterViewController: UIViewController {
     
     func updateKickboardInfoLabels(kickboardID: String, returnInfo: String, batteryInfo: Int) {
         // 더미 데이터로 레이블 업데이트
-        kickboardInfoLabel.text = "Kickboard ID: \(kickboardID)"
-        returnInfoLabel.text = "Return Info: \(returnInfo)"
-        batteryInfoLabel.text = "Battery Info: \(batteryInfo)%"
+        kickboardInfoLabel.text = "킥보드 아이디: \(kickboardID)"
+        returnInfoLabel.text = "대여 여부: \(returnInfo)"
+        batteryInfoLabel.text = "배터리 잔량: \(batteryInfo)%"
     }
-
     
-    @IBAction func rentReturnButtonTapped(_ sender: UIButton) {
-        guard let kickboardID = rentedKickboardID else {
-            showAlert(title: "Error", message: "Please scan a QR code first")
+    
+    
+    @IBAction func rentButton(_ sender: UIButton) {
+        guard let kickboardID = rentedKickboardID, let kickboard = KickboardManager.shared.getKickboard(uniqueID: kickboardID) else {
+            showAlert(title: "Error", message: "킥보드의 QR을 인식해주세요.")
             return
         }
         
-        if var kickboard = KickboardManager.shared.getKickboard(uniqueID: kickboardID) {
-            kickboard.isRented.toggle()
-            KickboardManager.shared.saveKickboard(kickboard: kickboard)
-            updateRentReturnButton(isRented: kickboard.isRented)
+        let alertController = UIAlertController(title: "대여 확인", message: "대여하시겠습니까?", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "예", style: .default, handler: { [weak self] _ in
+            var updatedKickboard = kickboard
+            updatedKickboard.isRented.toggle()
+            KickboardManager.shared.saveKickboard(kickboard: updatedKickboard)
+            self?.updateRentReturnButton(isRented: updatedKickboard.isRented)
             
-            // 이 부분에서 실제 배터리 수준 정보를 가져와야 함. 현재는 더미 값으로 설정됨
+            // 레이블 업데이트 (더미 데이터로 설정됨)
             let batteryLevel = 100
-            updateKickboardInfoLabels(kickboardID: kickboard.uniqueID, returnInfo: "Sample Return Info", batteryInfo: batteryLevel)
-        } else {
-            showAlert(title: "Error", message: "Kickboard not found")
-        }
+            self?.updateKickboardInfoLabels(kickboardID: updatedKickboard.uniqueID, returnInfo: "Sample Return Info", batteryInfo: batteryLevel)
+            
+            // MypageViewController로 이동
+            self?.navigateToMypage()
+        }))
+        alertController.addAction(UIAlertAction(title: "아니오", style: .cancel))
+        present(alertController, animated: true)
     }
+    
+    
     
     func showAlert(title: String, message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .default))
         present(alertController, animated: true)
     }
+    
+    
+    func navigateToMypage() {
+        if let mypageViewController = storyboard?.instantiateViewController(withIdentifier: "MypageViewController") as? MypageViewController {
+            mypageViewController.modalPresentationStyle = .fullScreen
+            present(mypageViewController, animated: true, completion: nil)
+        }
+    }
+    
+    
 }
