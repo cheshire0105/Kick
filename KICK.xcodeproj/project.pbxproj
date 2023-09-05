@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AB8AF33F2AA5BD5D009A5644 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = AB8AF33E2AA5BD5D009A5644 /* SnapKit */; };
+		BB25743B2CA2DBEF43BC142C /* Pods_KICK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 968FB9DA8EBA99339B012061 /* Pods_KICK.framework */; };
 		FF006F542AA58CEF00A3CB8A /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF006F532AA58CEF00A3CB8A /* Model.swift */; };
 		FF36A79A2AA5F00800980717 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF36A7992AA5F00800980717 /* UserManager.swift */; };
 		FF557F172AA5695B00C9CAEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF557F162AA5695B00C9CAEC /* AppDelegate.swift */; };
@@ -28,6 +29,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4F8E136C82DD1A605B7DC3FB /* Pods-KICK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KICK.release.xcconfig"; path = "Target Support Files/Pods-KICK/Pods-KICK.release.xcconfig"; sourceTree = "<group>"; };
+		968FB9DA8EBA99339B012061 /* Pods_KICK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KICK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D77E8CB7C69D35ED06B6C6EF /* Pods-KICK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KICK.debug.xcconfig"; path = "Target Support Files/Pods-KICK/Pods-KICK.debug.xcconfig"; sourceTree = "<group>"; };
 		FF006F532AA58CEF00A3CB8A /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		FF36A7992AA5F00800980717 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		FF557F132AA5695B00C9CAEC /* KICK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KICK.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -55,17 +59,37 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB8AF33F2AA5BD5D009A5644 /* SnapKit in Frameworks */,
+				BB25743B2CA2DBEF43BC142C /* Pods_KICK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		32185FB7FDEC356A0054B0F0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D77E8CB7C69D35ED06B6C6EF /* Pods-KICK.debug.xcconfig */,
+				4F8E136C82DD1A605B7DC3FB /* Pods-KICK.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		C822AE802F1BC2F6C7E0BF46 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				968FB9DA8EBA99339B012061 /* Pods_KICK.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		FF557F0A2AA5695B00C9CAEC = {
 			isa = PBXGroup;
 			children = (
 				FF557F152AA5695B00C9CAEC /* KICK */,
 				FF557F142AA5695B00C9CAEC /* Products */,
+				32185FB7FDEC356A0054B0F0 /* Pods */,
+				C822AE802F1BC2F6C7E0BF46 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -133,9 +157,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FF557F272AA5695D00C9CAEC /* Build configuration list for PBXNativeTarget "KICK" */;
 			buildPhases = (
+				637FC3A6CF95D09006100394 /* [CP] Check Pods Manifest.lock */,
 				FF557F0F2AA5695B00C9CAEC /* Sources */,
 				FF557F102AA5695B00C9CAEC /* Frameworks */,
 				FF557F112AA5695B00C9CAEC /* Resources */,
+				9FECDB6C59FD259C2A08443A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -201,6 +227,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		637FC3A6CF95D09006100394 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KICK-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9FECDB6C59FD259C2A08443A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KICK/Pods-KICK-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KICK/Pods-KICK-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KICK/Pods-KICK-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FF557F0F2AA5695B00C9CAEC /* Sources */ = {
@@ -358,6 +426,7 @@
 		};
 		FF557F282AA5695D00C9CAEC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D77E8CB7C69D35ED06B6C6EF /* Pods-KICK.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -390,6 +459,7 @@
 		};
 		FF557F292AA5695D00C9CAEC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4F8E136C82DD1A605B7DC3FB /* Pods-KICK.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

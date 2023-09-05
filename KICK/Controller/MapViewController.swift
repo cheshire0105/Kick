@@ -12,9 +12,13 @@ class MapViewController: UIViewController {
     
     // Properties
     private let registerButton = UIButton(type: .system)
+    private let mapView = NMFMapView() 
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
 
         configureLayout()
         registerButton.setBackgroundImage(UIImage(systemName: "rectangle.fill"), for: .normal)
