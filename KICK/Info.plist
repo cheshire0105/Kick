@@ -4,6 +4,8 @@
 <dict>
     <key>NMFClientId</key>
     <string>hovsdx3zn0</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+    <string>사용자의 위치를 받습니다.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string></string>
 	<key>NSCameraUsageDescription</key>
