@@ -15,12 +15,11 @@ class MapViewController: UIViewController, NMFMapViewOptionDelegate {
     
     private let locationManager = CLLocationManager()
     private var kickboardCoordinates = [[Double]]()
-    private var currentLatitude = 37.36631851883025
-    private var currentLongitude = 127.10944555502921
+    private var currentLatitude = 0.0
+    private var currentLongitude = 0.0
     
     private let registerButton = {
         let button = UIButton()
-        // button.setBackgroundImage(UIImage(systemName: "rectangle.fill"), for: .normal)
         button.addTarget(MapViewController.self, action: #selector(registerButtonAction), for: .touchUpInside)
         return button
     }()
@@ -45,7 +44,6 @@ class MapViewController: UIViewController, NMFMapViewOptionDelegate {
                 for marker in markers {
                     marker.mapView = self?.mapView
                     marker.touchHandler = {(overlay: NMFOverlay) -> Bool in
-                        print("오버레이 터치됨")
                         return true
                     }
                 }
@@ -134,6 +132,8 @@ extension MapViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         print("didUpdateLocations")
         if let location = locations.first {
+            currentLatitude = location.coordinate.latitude
+            currentLongitude = location.coordinate.longitude
             print("위도: \(location.coordinate.latitude)")
             print("경도: \(location.coordinate.longitude)")
         }
