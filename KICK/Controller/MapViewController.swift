@@ -5,7 +5,7 @@ import NMapsMap
 import CoreLocation
 
 class MapViewController: UIViewController, NMFMapViewOptionDelegate {
-
+    
     // Properties
     private let mapView = NMFMapView()
     private let naverMapView = NMFNaverMapView()
@@ -14,9 +14,10 @@ class MapViewController: UIViewController, NMFMapViewOptionDelegate {
     private let zoomControlButton = NMFZoomControlView()
     
     private let locationManager = CLLocationManager()
+    private var kickboardCoordinates = [[Double]]()
     private var currentLatitude = 37.36631851883025
     private var currentLongitude = 127.10944555502921
-
+    
     private let registerButton = {
         let button = UIButton()
         // button.setBackgroundImage(UIImage(systemName: "rectangle.fill"), for: .normal)
@@ -28,16 +29,17 @@ class MapViewController: UIViewController, NMFMapViewOptionDelegate {
         super.viewDidLoad()
         
         configureCoreLocation()
-
+        
         DispatchQueue.global(qos: .default).async { [self] in
+            generateRandomLocation()
             var markers = [NMFMarker]()
             // 백그라운드 스레드
-            for index in [ [currentLatitude, currentLongitude], [currentLatitude + 0.001, currentLongitude + 0.001]  ] {
+            for index in kickboardCoordinates {
                 let marker = NMFMarker(position: NMGLatLng(lat: index[0], lng: index[1])
-, iconImage: NMFOverlayImage(name: "KickBoard"))
+                                       , iconImage: NMFOverlayImage(name: "KickBoard"))
                 markers.append(marker)
             }
-
+            
             DispatchQueue.main.async { [weak self] in
                 // 메인 스레드
                 for marker in markers {
@@ -53,7 +55,7 @@ class MapViewController: UIViewController, NMFMapViewOptionDelegate {
                 self?.configureMap()
                 self?.configureLayout()
             }
-
+            
         }
     }
     
@@ -139,5 +141,23 @@ extension MapViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
+    }
+    
+    func generateRandomLocation() {
+        let radiusInMeters = 1000.0 // 1km 반경 내에서 랜덤 좌표 생성
+        let center = CLLocationCoordinate2D(latitude: 37.36631851883025, longitude: 127.10944555502921)
+        
+        for _ in 1...15 {
+            // 중심 좌표를 기준으로 랜덤한 거리와 방향 생성
+            let randomDistance = Double.random(in: 0...radiusInMeters)
+            let randomDirection = Double.random(in: 0...(2 * .pi))
+            // 새로운 좌표 계산
+            let latitude = center.latitude + (randomDistance / 111_000) * sin(randomDirection)
+            let longitude = center.longitude + (randomDistance / (111_000 * cos(center.latitude))) * cos(randomDirection)
+            
+            kickboardCoordinates.append([latitude, longitude])
+        }
+        
+        print(kickboardCoordinates)
     }
 }
