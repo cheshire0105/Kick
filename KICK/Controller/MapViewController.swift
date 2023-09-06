@@ -13,7 +13,9 @@ class MapViewController: UIViewController, NMFMapViewOptionDelegate {
     private let positionButton = NMFLocationButton()
     private let zoomControlButton = NMFZoomControlView()
     
-    let locationManager = CLLocationManager()
+    private let locationManager = CLLocationManager()
+    private var currentLatitude = 37.36631851883025
+    private var currentLongitude = 127.10944555502921
 
     private let registerButton = {
         let button = UIButton()
@@ -30,8 +32,8 @@ class MapViewController: UIViewController, NMFMapViewOptionDelegate {
         DispatchQueue.global(qos: .default).async { [self] in
             var markers = [NMFMarker]()
             // 백그라운드 스레드
-            for index in 1...5 {
-                let marker = NMFMarker(position: NMGLatLng(lat: 37.36631851883025, lng: 127.10944555502921)
+            for index in [ [currentLatitude, currentLongitude], [currentLatitude + 0.001, currentLongitude + 0.001]  ] {
+                let marker = NMFMarker(position: NMGLatLng(lat: index[0], lng: index[1])
 , iconImage: NMFOverlayImage(name: "KickBoard"))
                 markers.append(marker)
             }
@@ -87,10 +89,10 @@ class MapViewController: UIViewController, NMFMapViewOptionDelegate {
         }
         zoomControlButton.backgroundColor = .blue
         zoomControlButton.snp.makeConstraints { make in
-            make.leading.equalTo(registerButton.snp.trailing)
-            make.bottom.equalTo(registerButton.snp.top)
+            make.leading.equalTo(positionButton.snp.leading)
+            make.bottom.equalTo(positionButton.snp.top).offset(-10)
         }
-
+        
     }
     
     @objc func registerButtonAction() {
