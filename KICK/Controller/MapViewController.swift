@@ -20,7 +20,7 @@ class MapViewController: UIViewController, NMFMapViewOptionDelegate {
     
     private let registerButton = {
         let button = UIButton()
-        button.addTarget(MapViewController.self, action: #selector(registerButtonAction), for: .touchUpInside)
+        button.addTarget(self, action: #selector(registerButtonAction), for: .touchUpInside)
         return button
     }()
     
@@ -44,6 +44,7 @@ class MapViewController: UIViewController, NMFMapViewOptionDelegate {
                 for marker in markers {
                     marker.mapView = self?.mapView
                     marker.touchHandler = {(overlay: NMFOverlay) -> Bool in
+                        print("마커 클릭함")
                         return true
                     }
                 }
