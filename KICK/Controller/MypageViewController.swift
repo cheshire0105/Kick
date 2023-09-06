@@ -8,15 +8,18 @@ import Foundation
 import UIKit
 
 class MypageViewController: UIViewController {
+    
+    let defaults = UserDefaults.standard
+    let userData = UserManager.shared
 
     var currentUserID: String?
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var addProfilePhoto: UIButton!
-    @IBOutlet weak var editName: UITextField!
-    @IBOutlet weak var editContactNumber: UITextField!
-    @IBOutlet weak var editCreditInfo: UITextField!
-    @IBOutlet weak var editLicense: UITextField!
+    @IBOutlet weak var userName: UITextField!
+    @IBOutlet weak var userContact: UITextField!
+    @IBOutlet weak var userCredit: UITextField!
+    @IBOutlet weak var userLicense: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +47,16 @@ class MypageViewController: UIViewController {
         guard let userID = currentUserID else {
             return dismiss(animated: true, completion: nil)
         }
-        if let user = UserManager.shared.getUser(id: userID) {
+        if let user = userData.getUser(id: userID) {
+            var userName = userName.text
+            var userContact = userContact.text
+            var userCredit = userCredit.text
+            var userLicense = userLicense.text
+            
+//            userData.userName.append(userName ?? "이름 없음")
+//            
+//            defaults.set(userData.userName, forKey: "userName")
+            
             
         } else {
             return dismiss(animated: true, completion: nil)
