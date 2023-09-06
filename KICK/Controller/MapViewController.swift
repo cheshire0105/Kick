@@ -82,13 +82,13 @@ class MapViewController: UIViewController, NMFMapViewOptionDelegate {
         }
         positionButton.backgroundColor = .yellow
         positionButton.snp.makeConstraints { make in
-            make.trailing.equalTo(registerButton.snp.trailing)
+            make.leading.equalTo(registerButton.snp.leading)
             make.bottom.equalTo(registerButton.snp.top).offset(-10)
         }
         zoomControlButton.backgroundColor = .blue
         zoomControlButton.snp.makeConstraints { make in
-            make.leading.equalTo(positionButton.snp.leading)
-            make.bottom.equalTo(positionButton.snp.top)
+            make.leading.equalTo(registerButton.snp.trailing)
+            make.bottom.equalTo(registerButton.snp.top)
         }
 
     }
@@ -126,12 +126,16 @@ extension MapViewController: CLLocationManagerDelegate {
             print("위치 서비스 Off 상태")
         }
     }
-
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         print("didUpdateLocations")
         if let location = locations.first {
             print("위도: \(location.coordinate.latitude)")
             print("경도: \(location.coordinate.longitude)")
         }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
     }
 }

@@ -83,7 +83,6 @@
 				A8DA9685DDAD710D00540C3D /* Pods-KICK.debug.xcconfig */,
 				4C6BE8FA72AC6B640ABB9574 /* Pods-KICK.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -212,7 +211,7 @@
 			);
 			mainGroup = FF557F0A2AA5695B00C9CAEC;
 			packageReferences = (
-				AB8AF33D2AA5BD5D009A5644 /* XCRemoteSwiftPackageReference "SnapKit.git" */,
+				AB8AF33D2AA5BD5D009A5644 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = FF557F142AA5695B00C9CAEC /* Products */;
 			projectDirPath = "";
@@ -527,7 +526,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		AB8AF33D2AA5BD5D009A5644 /* XCRemoteSwiftPackageReference "SnapKit.git" */ = {
+		AB8AF33D2AA5BD5D009A5644 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
@@ -540,7 +539,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		AB8AF33E2AA5BD5D009A5644 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = AB8AF33D2AA5BD5D009A5644 /* XCRemoteSwiftPackageReference "SnapKit.git" */;
+			package = AB8AF33D2AA5BD5D009A5644 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
