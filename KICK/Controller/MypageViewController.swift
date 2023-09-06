@@ -20,23 +20,23 @@ class MypageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUserData()
+//        setupUserData()
         setupProfilePhoto()
 //        editProfile()
     }
     // 💡마이페이지 메서드 모음💡
-    func setupUserData() {
-        guard let userID = currentUserID else {
-            return dismiss(animated: true, completion: nil)
-        }
-        if let user = UserManager.shared.getUser(id: userID) {
-            // 유저정보를 화면에 표시
-        } else {
-            // 유저 데이터를 찾을 수 없는 경우
-            // 로그인을 요망 에러 표시, 에러는 파일 하단에 정리해놓음.
-            return dismiss(animated: true, completion: nil)
-        }
-    }
+//    func setupUserData() {
+//        guard let userID = currentUserID else {
+//            return dismiss(animated: true, completion: nil)
+//        }
+//        if let user = UserManager.shared.getUser(id: userID) {
+//            // 유저정보를 화면에 표시
+//        } else {
+//            // 유저 데이터를 찾을 수 없는 경우
+//            // 로그인을 요망 에러 표시, 에러는 파일 하단에 정리해놓음.
+//            return dismiss(animated: true, completion: nil)
+//        }
+//    }
 
     // 💡수정페이지 메서드 모음💡
     // 등록버튼 클릭시(유저 데이터 저장 및 업데이트)
@@ -63,10 +63,8 @@ class MypageViewController: UIViewController {
     // 프로필 이미지 등록
     func setupProfilePhoto() {
         addProfilePhoto?.addTarget(self, action: #selector(uploadPhoto), for: .touchUpInside)
-        view.addSubview(imageView)
-        view.addSubview(addProfilePhoto)
     }
-    // 아래 코드는 과연 필요한 코드인가?
+    // 사진이 표시되는 프레임
     func photoFrame() {
         let safeArea = view.safeAreaLayoutGuide; NSLayoutConstraint.activate([
             imageView.heightAnchor.constraint(equalTo: view.heightAnchor),
