@@ -2,12 +2,18 @@
 import UIKit
 import SnapKit
 import NMapsMap
+import CoreLocation
 
-class MapViewController: UIViewController, NMFMapViewOptionDelegate  {
+class MapViewController: UIViewController, NMFMapViewOptionDelegate {
 
     // Properties
     private let mapView = NMFMapView()
     private let naverMapView = NMFNaverMapView()
+    
+    private let positionButton = NMFLocationButton()
+    private let zoomControlButton = NMFZoomControlView()
+    
+    let locationManager = CLLocationManager()
 
     private let registerButton = {
         let button = UIButton()
@@ -16,15 +22,14 @@ class MapViewController: UIViewController, NMFMapViewOptionDelegate  {
         return button
     }()
     
-    private let positionButton = NMFLocationButton()
-    private let zoomControlButton = NMFZoomControlView()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureCoreLocation()
+
         DispatchQueue.global(qos: .default).async { [self] in
-            // 백그라운드 스레드
             var markers = [NMFMarker]()
+            // 백그라운드 스레드
             for index in 1...5 {
                 let marker = NMFMarker(position: NMGLatLng(lat: 37.36631851883025, lng: 127.10944555502921)
 , iconImage: NMFOverlayImage(name: "KickBoard"))
@@ -95,7 +100,6 @@ class MapViewController: UIViewController, NMFMapViewOptionDelegate  {
             self.present(kickBoardRegisterVC, animated: true, completion: nil)
         }
     }
-    
 }
 
 
@@ -103,5 +107,31 @@ extension MapViewController: NMFAuthManagerDelegate {
     /* MNFAuthManagerDelegate, 인증 실패하면 Error 반환 */
     func authorized(_ state: NMFAuthState, error: Error?) {
         print("error: ", error!)
+    }
+}
+
+extension MapViewController: CLLocationManagerDelegate {
+    
+    func configureCoreLocation() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        
+        // 아이폰 설정에서의 위치 서비스가 켜진 상태라면
+        if CLLocationManager.locationServicesEnabled() {
+            print("위치 서비스 On 상태")
+            locationManager.startUpdatingLocation() //위치 정보 받아오기 시작
+            print(locationManager.location?.coordinate)
+        } else {
+            print("위치 서비스 Off 상태")
+        }
+    }
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print("didUpdateLocations")
+        if let location = locations.first {
+            print("위도: \(location.coordinate.latitude)")
+            print("경도: \(location.coordinate.longitude)")
+        }
     }
 }
