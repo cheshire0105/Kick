@@ -8,65 +8,85 @@ import Foundation
 import UIKit
 
 class MypageViewController: UIViewController {
-
+    
+    let defaults = UserDefaults.standard
+    let userData = UserManager.shared
+    
     var currentUserID: String?
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var addProfilePhoto: UIButton!
-    @IBOutlet weak var editName: UITextField!
-    @IBOutlet weak var editContactNumber: UITextField!
-    @IBOutlet weak var editCreditInfo: UITextField!
-    @IBOutlet weak var editLicense: UITextField!
+    @IBOutlet weak var userName: UITextField!
+    @IBOutlet weak var userContact: UITextField!
+    @IBOutlet weak var userCredit: UITextField!
+    @IBOutlet weak var userLicense: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUserData()
+        //        setupUserData()
         setupProfilePhoto()
-//        editProfile()
+        //        editProfile()
     }
     // 💡마이페이지 메서드 모음💡
-    func setupUserData() {
-        guard let userID = currentUserID else {
-            return dismiss(animated: true, completion: nil)
-        }
-        if let user = UserManager.shared.getUser(id: userID) {
-            // 유저정보를 화면에 표시
-        } else {
-            // 유저 데이터를 찾을 수 없는 경우
-            // 로그인을 요망 에러 표시, 에러는 파일 하단에 정리해놓음.
-            return dismiss(animated: true, completion: nil)
-        }
-    }
-
+    //    func setupUserData() {
+    //        guard let userID = currentUserID else {
+    //            return dismiss(animated: true, completion: nil)
+    //        }
+    //        if let user = UserManager.shared.getUser(id: userID) {
+    //            // 유저정보를 화면에 표시
+    //        } else {
+    //            // 유저 데이터를 찾을 수 없는 경우
+    //            // 로그인을 요망 에러 표시, 에러는 파일 하단에 정리해놓음.
+    //            return dismiss(animated: true, completion: nil)
+    //        }
+    //    }
+    
     // 💡수정페이지 메서드 모음💡
     // 등록버튼 클릭시(유저 데이터 저장 및 업데이트)
     @IBAction func editProfile(_ sender: Any) {
         guard let userID = currentUserID else {
             return dismiss(animated: true, completion: nil)
         }
-        if let user = UserManager.shared.getUser(id: userID) {
+        if let user = userData.getUser(id: userID) {
+            var newUser = user
+            newUser.userName = userName.text ?? newUser.userName
+            newUser.userContact = userContact.text ?? newUser.userContact
+            newUser.userCredit = userCredit.text ?? newUser.userCredit
+            newUser.userLicense = userLicense.text ?? newUser.userLicense
+            
+            userData.saveUser(user: newUser) // 유저 데이터를 수정하고 저장
             
         } else {
             return dismiss(animated: true, completion: nil)
         }
     }
-    
+    // 회원탈퇴버튼 클릭시(유저정보 삭제)
+    @IBAction func removeUser(_ sender: Any) {
+        // 탈퇴의사를 재확인 하는 알럿 표시
+        let deleteAlert = UIAlertController(title: "의사 재확인", message: "정말로 탈퇴하시겠습니까?", preferredStyle: .alert)
+        // '아니오(철회)' 클릭시 -> dismiss
+        let cancelAction = UIAlertAction(title: "아니오", style: .cancel, handler: nil)
+        deleteAlert.addAction(cancelAction)
+        present(deleteAlert, animated: true)
+        // '네' 클릭시 -> 사용자 정보 삭제
+        let okAction = UIAlertAction(title: "네", style: .default, handler: nil)
+        deleteAlert.addAction(okAction)
+        
+    }
     // 취소버튼 클릭시(MyPage로 화면전환)
     @IBAction func backToMypage(_ sender: Any) {
         if self.presentingViewController != nil {
-             self.dismiss(animated: true)
-           } else if self.navigationController != nil {
-             self.navigationController?.popViewController(animated: true)
-           }
+            self.dismiss(animated: true)
+        } else if self.navigationController != nil {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     // 프로필 이미지 등록
     func setupProfilePhoto() {
         addProfilePhoto?.addTarget(self, action: #selector(uploadPhoto), for: .touchUpInside)
-        view.addSubview(imageView)
-        view.addSubview(addProfilePhoto)
     }
-    // 아래 코드는 과연 필요한 코드인가?
+    // 사진이 표시되는 프레임
     func photoFrame() {
         let safeArea = view.safeAreaLayoutGuide; NSLayoutConstraint.activate([
             imageView.heightAnchor.constraint(equalTo: view.heightAnchor),
@@ -85,9 +105,9 @@ extension MypageViewController: UIImagePickerControllerDelegate, UINavigationCon
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImage =
             info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-                imageView.contentMode = .scaleAspectFit
-                imageView.image = pickedImage
-            }
+            imageView.contentMode = .scaleAspectFit
+            imageView.image = pickedImage
+        }
         dismiss(animated: true, completion: nil)
     }
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {

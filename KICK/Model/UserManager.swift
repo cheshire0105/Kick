@@ -27,6 +27,7 @@ class UserManager {
     
     // 유저의 정보를 가져오는 로직 (Read)
     func getUser(id: String) -> User? {
+        
         return getAllUsers()?.first { $0.id == id }
     }
     
