@@ -9,13 +9,25 @@ import UIKit
 import SnapKit
 
 class SignUpViewController: UIViewController {
-
+    
     private let makingAccountInputView = UIView()
     
     private let logoImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "logoImage")
         return imageView
+    }()
+    
+    private let signUpLabel = {
+        let label = UILabel()
+        label.layer.masksToBounds = true
+        label.layer.cornerRadius = 10
+        label.text = "Sign UP"
+        label.textColor = UIColor.black
+        label.backgroundColor = UIColor.white
+        label.font = UIFont.boldSystemFont(ofSize: 25)
+        label.textAlignment = .center
+        return label
     }()
     
     private let makingIdTextField = {
@@ -29,10 +41,6 @@ class SignUpViewController: UIViewController {
         textField.textAlignment = .center
         textField.layer.borderColor = UIColor.red.cgColor
         textField.layer.borderWidth = 1.0
-        textField.layer.shadowColor = UIColor.red.cgColor
-        textField.layer.shadowOffset = CGSize(width: 10, height: 10)
-        textField.layer.shadowOpacity = 1
-        textField.layer.shadowRadius = 10.0
         return textField
     }()
     
@@ -88,37 +96,46 @@ class SignUpViewController: UIViewController {
         return button
     }()
     
-/*------------------------------------*/
+    /*------------------------------------*/
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.backgroundColor = .white
         configureMakingAccountInputView()
         configureLayout()
         buttonClick()
     }
     
-/*------------------------------------*/
-
+    /*------------------------------------*/
+    
     func configureMakingAccountInputView () {
-
+        
         for subview in [ makingIdTextField, makingPasswordTextField, checkingPasswordTextField, okButton, cancelButton ] {
             makingAccountInputView.addSubview(subview)
         }
     }
-
+    
     func configureLayout () {
-
+        
         for subview in [
-            logoImageView, makingIdTextField, makingPasswordTextField, checkingPasswordTextField, okButton, cancelButton ] {
+            logoImageView, signUpLabel, makingIdTextField, makingPasswordTextField, checkingPasswordTextField, okButton, cancelButton ] {
             view.addSubview(subview)
         }
         
         logoImageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview().offset(-100)
-                make.width.equalTo(300)
-                make.height.equalTo(250)
+            make.width.equalTo(300)
+            make.height.equalTo(250)
+        }
+        
+        signUpLabel.snp.makeConstraints { make in
+            make.top.equalTo(logoImageView.snp.bottom).offset(5)
+            make.bottom.equalTo(makingIdTextField.snp.top).offset(-10)
+            make.leading.equalToSuperview().offset(150)
+            make.trailing.equalToSuperview().offset(-150)
+            make.width.equalTo(100)
+            make.height.equalTo(40)
         }
         
         makingIdTextField.snp.makeConstraints { make in
@@ -161,27 +178,34 @@ class SignUpViewController: UIViewController {
     
     
     
-/*------버튼-----*/
+    /*------버튼-----*/
     
     @objc func okButtonClick() {
-        print("회원가입 완료 버튼 클릭됨")
-        let storyboard = UIStoryboard(name: "Login", bundle: nil)
-        if let tabBarController = storyboard.instantiateViewController(withIdentifier: "TabBarController") as? TabBarController {
-            tabBarController.modalPresentationStyle = .fullScreen
-            self.present(tabBarController, animated: true) {
-                self.navigationController?.viewControllers.remove(at: 0)
+        print("회원가입 완료")
+    
+        let makeAccountAlert = UIAlertController(title: "가입완료", message: "로그인해주세요.", preferredStyle: .alert)
+        
+        let alertOk = UIAlertAction(title: "OK", style: .default) { (textField) in
+            let storyboard = UIStoryboard(name: "Login", bundle: nil)
+            if let loginViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
+                loginViewController.modalPresentationStyle = .fullScreen
+                self.present(loginViewController, animated: false) {
+                    self.navigationController?.viewControllers.remove(at: 0)
+                }
             }
         }
+        makeAccountAlert.addAction(alertOk)
+        self.present(makeAccountAlert, animated: true, completion: nil)
     }
     
-    
-    
     @objc func cancelButtonClick() {
+        print("가입을 포기")
         self.dismiss(animated: true, completion: nil)
     }
     func buttonClick () {
         cancelButton.addTarget(self, action: #selector(cancelButtonClick), for: .touchUpInside)
+        okButton.addTarget(self, action: #selector(okButtonClick), for: .touchUpInside)
     }
-//    okButton.addTarget(self, action: #selector, for: <#T##UIControl.Event#>)
-
+    
+    
 }
