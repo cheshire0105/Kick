@@ -5,12 +5,13 @@
 //  Created by cheshire on 2023/09/04.
 //
 
-import UIKit
-import SnapKit
+// MARK: - KICK APPLICATION
 
-class LoginViewController: UIViewController  {
-    
-    //MARK: - private
+import SnapKit
+import UIKit
+
+class LoginViewController: UIViewController {
+    // MARK: - private
 
     private let accountInputView = UIView()
     
@@ -42,6 +43,7 @@ class LoginViewController: UIViewController  {
         label.backgroundColor = UIColor.white
         label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textAlignment = .center
+        
         return label
     }()
     
@@ -57,9 +59,9 @@ class LoginViewController: UIViewController  {
         return label
     }()
     
-   private let idTextField = {
+    private let idTextField = {
         let textField = UITextField()
-       textField.layer.masksToBounds = true
+        textField.layer.masksToBounds = true
         textField.layer.cornerRadius = 10
         textField.placeholder = "Your ID"
         textField.textColor = UIColor.black
@@ -74,8 +76,6 @@ class LoginViewController: UIViewController  {
         return textField
     }()
     
-    
-    
     private let passwordTextField = {
         let textField = UITextField()
         textField.layer.masksToBounds = true
@@ -89,6 +89,8 @@ class LoginViewController: UIViewController  {
         textField.layer.borderWidth = 1.0
         textField.clearButtonMode = .whileEditing
         textField.clearsOnBeginEditing = true
+        textField.isSecureTextEntry = true
+
         return textField
     }()
     
@@ -113,7 +115,7 @@ class LoginViewController: UIViewController  {
         return button
     }()
     
-    //MARK: - life cycle
+    // MARK: - life cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -124,12 +126,12 @@ class LoginViewController: UIViewController  {
         buttonClick()
     }
     
+    override func viewDidAppear(_ animated: Bool) {}
     
-    //MARK: - layout
+    // MARK: - layout
 
-    func configureAccountInputView () {
-        
-        for subview in [ idTextField, passwordTextField, idLabel, passwordLabel ] {
+    func configureAccountInputView() {
+        for subview in [idTextField, passwordTextField, idLabel, passwordLabel] {
             accountInputView.addSubview(subview)
         }
         
@@ -158,13 +160,12 @@ class LoginViewController: UIViewController  {
         }
     }
     
-    func configureLayout () {
-        
+    func configureLayout() {
         for subview in [logoImageView, logInButton, accountInputView, signUpButton, makingAccountLabel] {
             view.addSubview(subview)
         }
         
-        logoImageView.snp.makeConstraints{ make in
+        logoImageView.snp.makeConstraints { make in
             make.height.equalTo(300)
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(30)
             make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-10)
@@ -189,43 +190,48 @@ class LoginViewController: UIViewController  {
         signUpButton.snp.makeConstraints { make in
             make.top.equalTo(logInButton.snp.bottom).offset(45)
             make.leading.equalTo(makingAccountLabel.snp.trailing).offset(10)
-            
         }
         
         makingAccountLabel.snp.makeConstraints { make in
             make.top.equalTo(logInButton.snp.bottom).offset(50)
             make.leading.equalToSuperview().offset(100)
-            
         }
-        
     }
     
-    //MARK: - func click event
+    // MARK: - func click event
+
+    @objc func idTextFieldTyped(_ sender: UITextField) {
+        let userWord = idTextField.text?.lowercased()
+        idTextField.text = userWord
+    }
     
     @objc func logInButtonClick() {
         print("로그인 버튼 클릭됨")
-        let userDefaults = UserDefaults.standard
-        if let savedId = userDefaults.string(forKey: "userId"),
-           let savedPassword = userDefaults.string(forKey: "userPassword") {
-            if savedId == idTextField.text && savedPassword == passwordTextField.text{
-                let storyboard = UIStoryboard(name: "MainTabBar", bundle: nil)
-                if let tabBarController = storyboard.instantiateViewController(withIdentifier: "TabBarController") as? TabBarController {
-                    tabBarController.modalPresentationStyle = .fullScreen
-                    self.present(tabBarController, animated: true) {
-                        self.navigationController?.viewControllers.remove(at: 0)
+        if let userIdForLogin = idTextField.text, !userIdForLogin.isEmpty,
+           let userPasswordForLogin = passwordTextField.text, !userPasswordForLogin.isEmpty
+        {
+            
+            let userManager = UserManager.shared
+            if let user = userManager.getUser(id: userIdForLogin) {
+                if user.password == userPasswordForLogin {
+                    // 로그인 성공
+                    let storyboard = UIStoryboard(name: "MainTabBar", bundle: nil)
+                    if let tabBarController = storyboard.instantiateViewController(withIdentifier: "TabBarController") as? TabBarController {
+                        tabBarController.modalPresentationStyle = .fullScreen
+                        present(tabBarController, animated: true) {
+                            self.navigationController?.viewControllers.remove(at: 0)
+                        }
                     }
+                } else {
+                    print("로그인 실패")
+                    let alertController = UIAlertController(title: "로그인 실패", message: "ID 또는 비밀번호가 일치하지 않습니다.", preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "돌아가기", style: .default, handler: nil)
+                    alertController.addAction(okAction)
+                    present(alertController, animated: true, completion: nil)
                 }
-            }else {
-                print("로그인 실패")
-                let alertController = UIAlertController(title: "로그인 실패", message: "ID 또는 비밀번호가 일치하지 않습니다.", preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "돌아가기", style: .default, handler: nil)
-                alertController.addAction(okAction)
-                present(alertController, animated: true, completion: nil)
-                
             }
         }
     }
-    
     @objc func signUpButtonClick() {
         print("회원가입 페이지로 가즈아")
         let signUpViewController = SignUpViewController()
@@ -233,9 +239,9 @@ class LoginViewController: UIViewController  {
         present(signUpViewController, animated: true, completion: nil)
     }
     
-    func buttonClick () {
+    func buttonClick() {
         logInButton.addTarget(self, action: #selector(logInButtonClick), for: .touchUpInside)
         signUpButton.addTarget(self, action: #selector(signUpButtonClick), for: .touchUpInside)
-        
+        idTextField.addTarget(self, action: #selector(idTextFieldTyped(_:)), for: .editingChanged)
     }
 }

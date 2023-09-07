@@ -9,9 +9,7 @@ import SnapKit
 import UIKit
 
 class SignUpViewController: UIViewController {
-    
-    
-    //MARK: - private
+    // MARK: - private
 
     private let makingAccountInputView = UIView()
     
@@ -62,6 +60,7 @@ class SignUpViewController: UIViewController {
         textField.layer.borderWidth = 1.0
         textField.clearButtonMode = .whileEditing
         textField.clearsOnBeginEditing = true
+        textField.isSecureTextEntry = true
         return textField
     }()
     
@@ -78,6 +77,7 @@ class SignUpViewController: UIViewController {
         textField.layer.borderWidth = 1.0
         textField.clearButtonMode = .whileEditing
         textField.clearsOnBeginEditing = true
+        textField.isSecureTextEntry = true
         return textField
     }()
     
@@ -112,8 +112,6 @@ class SignUpViewController: UIViewController {
         label.layer.cornerRadius = 10
         label.font = UIFont.boldSystemFont(ofSize: 13)
         label.textAlignment = .center
-        // label.text = "asdasdfasdfasdf"
-        // label.isHidden = true
         return label
     }()
     
@@ -123,8 +121,6 @@ class SignUpViewController: UIViewController {
         label.layer.cornerRadius = 10
         label.font = UIFont.boldSystemFont(ofSize: 13)
         label.textAlignment = .center
-        // label.text = "asdasdfasdfasdf"
-        // label.isHidden = true
         return label
     }()
     
@@ -134,13 +130,10 @@ class SignUpViewController: UIViewController {
         label.layer.cornerRadius = 10
         label.font = UIFont.boldSystemFont(ofSize: 13)
         label.textAlignment = .center
-        // label.text = "asdasdfasdfasdf"
-        // label.isHidden = true
         return label
     }()
     
-   
-    //MARK: - life cycle
+    // MARK: - life cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -153,9 +146,7 @@ class SignUpViewController: UIViewController {
         buttonClick()
     }
     
-  
-    
-    //MARK: - layout
+    // MARK: - layout
 
     func configureMakingAccountInputView() {
         for subview in [makingIdTextField, makingPasswordTextField, checkingPasswordTextField, okButton, cancelButton, checkingPasswordCondition] {
@@ -235,9 +226,8 @@ class SignUpViewController: UIViewController {
         }
     }
     
-    //MARK: - func click event
+    // MARK: - func click event
 
-    
     @objc func okButtonClick() {
         if let newUserId = makingIdTextField.text, !newUserId.isEmpty,
            let newUserPassword = makingPasswordTextField.text, !newUserPassword.isEmpty,
@@ -247,29 +237,26 @@ class SignUpViewController: UIViewController {
             var newUser = User()
             newUser.id = newUserId
             newUser.password = newUserPassword
-            
+                
             if newUserId.isEmpty == false && newUserPassword.isEmpty == false && newUserPassword == confirmPassword {
                 newUser.id?.append(newUserId)
                 newUser.password?.append(newUserPassword)
                 userArray.append(newUser)
-                
-                UserDefaults.standard.set(newUserId, forKey: "userId")
-                UserDefaults.standard.set(newUserPassword, forKey: "userPassword")
-                UserDefaults.standard.synchronize()
-                
+                    
+                let userManager = UserManager.shared
+                let newUser = User(id: newUserId, password: newUserPassword)
+                userManager.saveUser(user: newUser)
+                   
                 print("새 계정이 만들어졌습니다.")
                 print("-----------------------")
                 print("새 계정 정보 - 아이디 : \(newUserId)  //  비밀번호 : \(newUserPassword)")
                 print("-----------------------")
-                
-//                let userIdList = userArray.compactMap { $0.id }
-                print("유저 목록 : \(userArray)")
             }
             else {
                 print("비밀번호가 일치하지 않습니다.")
                 return
             }
-            
+                
             let makeAccountAlert = UIAlertController(title: "가입완료", message: "로그인해주세요.", preferredStyle: .alert)
             let alertOk = UIAlertAction(title: "OK", style: .default) { _ in
                 let storyboard = UIStoryboard(name: "Login", bundle: nil)
@@ -322,6 +309,7 @@ class SignUpViewController: UIViewController {
                 idCondition.text = " 소문자와 숫자만 사용할수있습니다"
                 idCondition.textColor = .red
             }
+
         default:
             idCondition.text = " id는 6 ~ 12자 사이"
             idCondition.textColor = .red
@@ -353,7 +341,7 @@ class SignUpViewController: UIViewController {
                 passwordCondition.isHidden = true
             }
             else {
-                passwordCondition.text = " 대문자, 특수문자를 포함해야합니다."
+                passwordCondition.text = " 영문 , 특수문자를 포함해야합니다."
                 passwordCondition.textColor = .red
             }
             
@@ -364,18 +352,22 @@ class SignUpViewController: UIViewController {
     }
     
     @objc func checkingPasswordTyped(_ sender: UITextField) {
-        checkingPasswordCondition.isHidden = false
-        
         let checkAgainPassword = checkingPasswordTextField.text
         let checkPassword = makingPasswordTextField.text
         
-        if checkAgainPassword == checkPassword {
+        if makingPasswordTextField.text!.count >= 8 && checkAgainPassword == checkPassword {
+            checkingPasswordCondition.isHidden = false
             checkingPasswordCondition.text = "비밀번호 확인"
             checkingPasswordCondition.textColor = .green
         }
-        else {
+        
+        else if checkAgainPassword != checkPassword && checkingPasswordTextField.text!.count >= 1 {
+            checkingPasswordCondition.isHidden = false
             checkingPasswordCondition.text = "다시한번 확인하세요"
             checkingPasswordCondition.textColor = .red
+        }
+        else if checkingPasswordTextField.text == "" {
+            checkingPasswordCondition.text = ""
         }
     }
     
