@@ -97,12 +97,16 @@ class KickBoardRegisterViewController: UIViewController {
             let batteryLevel = 100
             self?.updateKickboardInfoLabels(kickboardID: updatedKickboard.uniqueID, returnInfo: "Sample Return Info", batteryInfo: batteryLevel)
             
+            // 대여 상태 변경 알림을 보냅니다.
+            NotificationCenter.default.post(name: NSNotification.Name("KickboardRentalStatusChanged"), object: updatedKickboard.isRented)
+            
             // MypageViewController로 이동
             self?.navigateToMypage()
         }))
         alertController.addAction(UIAlertAction(title: "아니오", style: .cancel))
         present(alertController, animated: true)
     }
+
     
     
     
