@@ -5,11 +5,14 @@
 //  Created by t2023-m0081 on 2023/09/05.
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
 class SignUpViewController: UIViewController {
     
+    
+    //MARK: - private
+
     private let makingAccountInputView = UIView()
     
     private let logoImageView = {
@@ -17,7 +20,7 @@ class SignUpViewController: UIViewController {
         imageView.image = UIImage(named: "logoImage")
         return imageView
     }()
-    
+
     private let signUpLabel = {
         let label = UILabel()
         label.layer.masksToBounds = true
@@ -41,6 +44,8 @@ class SignUpViewController: UIViewController {
         textField.textAlignment = .center
         textField.layer.borderColor = UIColor.red.cgColor
         textField.layer.borderWidth = 1.0
+        textField.clearButtonMode = .whileEditing
+        textField.clearsOnBeginEditing = true
         return textField
     }()
     
@@ -55,6 +60,8 @@ class SignUpViewController: UIViewController {
         textField.textAlignment = .center
         textField.layer.borderColor = UIColor.red.cgColor
         textField.layer.borderWidth = 1.0
+        textField.clearButtonMode = .whileEditing
+        textField.clearsOnBeginEditing = true
         return textField
     }()
     
@@ -69,6 +76,8 @@ class SignUpViewController: UIViewController {
         textField.textAlignment = .center
         textField.layer.borderColor = UIColor.red.cgColor
         textField.layer.borderWidth = 1.0
+        textField.clearButtonMode = .whileEditing
+        textField.clearsOnBeginEditing = true
         return textField
     }()
     
@@ -83,7 +92,7 @@ class SignUpViewController: UIViewController {
         button.layer.borderWidth = 2.0
         return button
     }()
-    
+
     private let cancelButton = {
         let button = UIButton()
         button.layer.cornerRadius = 10
@@ -96,15 +105,15 @@ class SignUpViewController: UIViewController {
         return button
     }()
     
-    //유효성 라벨
+    // 유효성 라벨
     private let idCondition = {
         let label = UILabel()
         label.layer.masksToBounds = true
         label.layer.cornerRadius = 10
         label.font = UIFont.boldSystemFont(ofSize: 13)
         label.textAlignment = .center
-        //label.text = "asdasdfasdfasdf"
-        //label.isHidden = true
+        // label.text = "asdasdfasdfasdf"
+        // label.isHidden = true
         return label
     }()
     
@@ -114,8 +123,8 @@ class SignUpViewController: UIViewController {
         label.layer.cornerRadius = 10
         label.font = UIFont.boldSystemFont(ofSize: 13)
         label.textAlignment = .center
-        //label.text = "asdasdfasdfasdf"
-        //label.isHidden = true
+        // label.text = "asdasdfasdfasdf"
+        // label.isHidden = true
         return label
     }()
     
@@ -125,35 +134,39 @@ class SignUpViewController: UIViewController {
         label.layer.cornerRadius = 10
         label.font = UIFont.boldSystemFont(ofSize: 13)
         label.textAlignment = .center
-        //label.text = "asdasdfasdfasdf"
-        //label.isHidden = true
+        // label.text = "asdasdfasdfasdf"
+        // label.isHidden = true
         return label
     }()
     
-    
-    /*------------------------------------*/
+   
+    //MARK: - life cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .white
+        
         configureMakingAccountInputView()
+        
         configureLayout()
         buttonClick()
     }
     
-    /*------------------------------------*/
+  
     
-    func configureMakingAccountInputView () {
-        
-        for subview in [ makingIdTextField, makingPasswordTextField, checkingPasswordTextField, okButton, cancelButton, checkingPasswordCondition ] {
+    //MARK: - layout
+
+    func configureMakingAccountInputView() {
+        for subview in [makingIdTextField, makingPasswordTextField, checkingPasswordTextField, okButton, cancelButton, checkingPasswordCondition] {
             makingAccountInputView.addSubview(subview)
         }
     }
     
-    func configureLayout () {
-        
+    func configureLayout() {
         for subview in [
-            logoImageView, signUpLabel, makingIdTextField, makingPasswordTextField, checkingPasswordTextField, okButton, cancelButton, idCondition, passwordCondition, checkingPasswordCondition ] {
+            logoImageView, signUpLabel, makingIdTextField, makingPasswordTextField, checkingPasswordTextField, okButton, cancelButton, idCondition, passwordCondition, checkingPasswordCondition,
+        ] {
             view.addSubview(subview)
         }
         
@@ -180,7 +193,7 @@ class SignUpViewController: UIViewController {
             make.height.equalTo(40)
         }
         
-        makingPasswordTextField.snp.makeConstraints{ make in
+        makingPasswordTextField.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview().offset(110)
             make.width.equalTo(200)
@@ -194,7 +207,6 @@ class SignUpViewController: UIViewController {
             make.height.equalTo(40)
         }
         
-        
         okButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview().offset(250)
@@ -207,13 +219,11 @@ class SignUpViewController: UIViewController {
             make.centerY.equalToSuperview().offset(300)
             make.width.equalTo(300)
             make.height.equalTo(40)
-            
         }
         
         idCondition.snp.makeConstraints { make in
             make.top.equalTo(makingIdTextField.snp.bottom).offset(5)
             make.leading.equalTo(makingIdTextField).offset(20)
-            
         }
         passwordCondition.snp.makeConstraints { make in
             make.top.equalTo(makingPasswordTextField.snp.bottom).offset(5)
@@ -222,20 +232,17 @@ class SignUpViewController: UIViewController {
         checkingPasswordCondition.snp.makeConstraints { make in
             make.top.equalTo(checkingPasswordTextField.snp.bottom).offset(5)
             make.leading.equalTo(checkingPasswordTextField).offset(20)
-            
         }
     }
     
-    
-    
-    /*------버튼-----*/
+    //MARK: - func click event
+
     
     @objc func okButtonClick() {
-        
         if let newUserId = makingIdTextField.text, !newUserId.isEmpty,
            let newUserPassword = makingPasswordTextField.text, !newUserPassword.isEmpty,
-           let confirmPassword = checkingPasswordTextField.text, !confirmPassword.isEmpty {
-            
+           let confirmPassword = checkingPasswordTextField.text, !confirmPassword.isEmpty
+        {
             var userArray: [User] = []
             var newUser = User()
             newUser.id = newUserId
@@ -245,13 +252,18 @@ class SignUpViewController: UIViewController {
                 newUser.id?.append(newUserId)
                 newUser.password?.append(newUserPassword)
                 userArray.append(newUser)
+                
+                UserDefaults.standard.set(newUserId, forKey: "userId")
+                UserDefaults.standard.set(newUserPassword, forKey: "userPassword")
+                UserDefaults.standard.synchronize()
+                
                 print("새 계정이 만들어졌습니다.")
                 print("-----------------------")
                 print("새 계정 정보 - 아이디 : \(newUserId)  //  비밀번호 : \(newUserPassword)")
                 print("-----------------------")
                 
-                let userIdList = userArray.compactMap { $0.id }
-                print("유저 목록 : \(userIdList)")
+//                let userIdList = userArray.compactMap { $0.id }
+                print("유저 목록 : \(userArray)")
             }
             else {
                 print("비밀번호가 일치하지 않습니다.")
@@ -259,7 +271,7 @@ class SignUpViewController: UIViewController {
             }
             
             let makeAccountAlert = UIAlertController(title: "가입완료", message: "로그인해주세요.", preferredStyle: .alert)
-            let alertOk = UIAlertAction(title: "OK", style: .default) { (textField) in
+            let alertOk = UIAlertAction(title: "OK", style: .default) { _ in
                 let storyboard = UIStoryboard(name: "Login", bundle: nil)
                 if let loginViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
                     loginViewController.modalPresentationStyle = .fullScreen
@@ -269,17 +281,17 @@ class SignUpViewController: UIViewController {
                 }
             }
             makeAccountAlert.addAction(alertOk)
-            self.present(makeAccountAlert, animated: true, completion: nil)
-        } else {
+            present(makeAccountAlert, animated: true, completion: nil)
+        }
+        else {
             print("모든 필드를 작성해야 합니다.")
         }
     }
     
     @objc func cancelButtonClick() {
         print("가입을 포기")
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
-    
     
     @objc func idTextFieldTyped(_ sender: UITextField) {
         idCondition.isHidden = false
@@ -291,7 +303,6 @@ class SignUpViewController: UIViewController {
         let count = userWord!.count
         
         switch count {
-            
         case 0:
             idCondition.text = " id는 필수입력 정보입니다."
             idCondition.textColor = .red
@@ -311,14 +322,13 @@ class SignUpViewController: UIViewController {
                 idCondition.text = " 소문자와 숫자만 사용할수있습니다"
                 idCondition.textColor = .red
             }
-        default :
+        default:
             idCondition.text = " id는 6 ~ 12자 사이"
             idCondition.textColor = .red
         }
     }
     
     @objc func passWordTextFieldTyped(_ sender: UITextField) {
-        
         passwordCondition.isHidden = false
         
         let minCount = 8
@@ -326,7 +336,6 @@ class SignUpViewController: UIViewController {
         let count = makingPasswordTextField.text!.count
         
         switch count {
-            
         case 0:
             passwordCondition.text = " 비밀번호는 필수입력정보 입니다"
             passwordCondition.textColor = .red
@@ -351,19 +360,16 @@ class SignUpViewController: UIViewController {
         default:
             passwordCondition.text = " pw는 8 ~ 16자 사이"
             idCondition.textColor = .red
-            
         }
     }
     
     @objc func checkingPasswordTyped(_ sender: UITextField) {
-        
         checkingPasswordCondition.isHidden = false
         
         let checkAgainPassword = checkingPasswordTextField.text
         let checkPassword = makingPasswordTextField.text
         
         if checkAgainPassword == checkPassword {
-            
             checkingPasswordCondition.text = "비밀번호 확인"
             checkingPasswordCondition.textColor = .green
         }
@@ -371,16 +377,9 @@ class SignUpViewController: UIViewController {
             checkingPasswordCondition.text = "다시한번 확인하세요"
             checkingPasswordCondition.textColor = .red
         }
-        
     }
     
-    
-    
-    
-    
-    
-    
-    func buttonClick () {
+    func buttonClick() {
         cancelButton.addTarget(self, action: #selector(cancelButtonClick), for: .touchUpInside)
         okButton.addTarget(self, action: #selector(okButtonClick), for: .touchUpInside)
         
@@ -388,6 +387,4 @@ class SignUpViewController: UIViewController {
         makingPasswordTextField.addTarget(self, action: #selector(passWordTextFieldTyped(_:)), for: .editingChanged)
         checkingPasswordTextField.addTarget(self, action: #selector(checkingPasswordTyped(_:)), for: .editingChanged)
     }
-    
-    
 }
