@@ -10,6 +10,8 @@ import SnapKit
 
 class LoginViewController: UIViewController  {
     
+    //MARK: - private
+
     private let accountInputView = UIView()
     
     private let logoImageView = {
@@ -55,8 +57,9 @@ class LoginViewController: UIViewController  {
         return label
     }()
     
-    let idTextField = {
+   private let idTextField = {
         let textField = UITextField()
+       textField.layer.masksToBounds = true
         textField.layer.cornerRadius = 10
         textField.placeholder = "Your ID"
         textField.textColor = UIColor.black
@@ -66,7 +69,8 @@ class LoginViewController: UIViewController  {
         textField.layer.borderColor = UIColor.red.cgColor
         textField.layer.borderWidth = 1.0
         textField.tintColor = .red
-        textField.isEnabled = true
+        textField.clearButtonMode = .whileEditing
+        textField.clearsOnBeginEditing = true
         return textField
     }()
     
@@ -74,6 +78,7 @@ class LoginViewController: UIViewController  {
     
     private let passwordTextField = {
         let textField = UITextField()
+        textField.layer.masksToBounds = true
         textField.layer.cornerRadius = 10
         textField.placeholder = "Your PW"
         textField.textColor = UIColor.black
@@ -82,6 +87,8 @@ class LoginViewController: UIViewController  {
         textField.textAlignment = .center
         textField.layer.borderColor = UIColor.red.cgColor
         textField.layer.borderWidth = 1.0
+        textField.clearButtonMode = .whileEditing
+        textField.clearsOnBeginEditing = true
         return textField
     }()
     
@@ -106,8 +113,8 @@ class LoginViewController: UIViewController  {
         return button
     }()
     
-    /*--------------------------------------------------------*/
-    
+    //MARK: - life cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -115,14 +122,11 @@ class LoginViewController: UIViewController  {
         configureAccountInputView()
         configureLayout()
         buttonClick()
-
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-
-    }
     
-    /*--------------------------------------------------------*/
+    //MARK: - layout
+
     func configureAccountInputView () {
         
         for subview in [ idTextField, passwordTextField, idLabel, passwordLabel ] {
@@ -130,7 +134,7 @@ class LoginViewController: UIViewController  {
         }
         
         idTextField.snp.makeConstraints { make in
-            make.leading.equalTo(40)
+            make.leading.equalTo(accountInputView.snp.leading).inset(40)
             make.top.equalToSuperview()
             make.trailing.equalToSuperview()
             make.height.equalTo(40)
@@ -171,7 +175,7 @@ class LoginViewController: UIViewController  {
             make.top.equalTo(logoImageView.snp.bottom).offset(50)
             make.leading.equalToSuperview().offset(0)
             make.width.equalTo(250)
-            
+            make.height.equalTo(200)
         }
         
         logInButton.snp.makeConstraints { make in
@@ -193,18 +197,31 @@ class LoginViewController: UIViewController  {
             make.leading.equalToSuperview().offset(100)
             
         }
-       
+        
     }
     
-    /*------버튼-----*/
+    //MARK: - func click event
+    
     @objc func logInButtonClick() {
         print("로그인 버튼 클릭됨")
-        
-        let storyboard = UIStoryboard(name: "MainTabBar", bundle: nil)
-        if let tabBarController = storyboard.instantiateViewController(withIdentifier: "TabBarController") as? TabBarController {
-            tabBarController.modalPresentationStyle = .fullScreen
-            self.present(tabBarController, animated: true) {
-                self.navigationController?.viewControllers.remove(at: 0)
+        let userDefaults = UserDefaults.standard
+        if let savedId = userDefaults.string(forKey: "userId"),
+           let savedPassword = userDefaults.string(forKey: "userPassword") {
+            if savedId == idTextField.text && savedPassword == passwordTextField.text{
+                let storyboard = UIStoryboard(name: "MainTabBar", bundle: nil)
+                if let tabBarController = storyboard.instantiateViewController(withIdentifier: "TabBarController") as? TabBarController {
+                    tabBarController.modalPresentationStyle = .fullScreen
+                    self.present(tabBarController, animated: true) {
+                        self.navigationController?.viewControllers.remove(at: 0)
+                    }
+                }
+            }else {
+                print("로그인 실패")
+                let alertController = UIAlertController(title: "로그인 실패", message: "ID 또는 비밀번호가 일치하지 않습니다.", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "돌아가기", style: .default, handler: nil)
+                alertController.addAction(okAction)
+                present(alertController, animated: true, completion: nil)
+                
             }
         }
     }
@@ -215,12 +232,10 @@ class LoginViewController: UIViewController  {
         signUpViewController.modalPresentationStyle = .fullScreen
         present(signUpViewController, animated: true, completion: nil)
     }
-   
+    
     func buttonClick () {
         logInButton.addTarget(self, action: #selector(logInButtonClick), for: .touchUpInside)
         signUpButton.addTarget(self, action: #selector(signUpButtonClick), for: .touchUpInside)
         
     }
 }
-
-
