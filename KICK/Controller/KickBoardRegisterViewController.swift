@@ -37,18 +37,18 @@ class KickBoardRegisterViewController: UIViewController {
         dummyImageView.contentMode = .scaleAspectFit
         dummyImageView.isUserInteractionEnabled = true
         dummyImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDummyImageTap)))
-
+        
         cameraView.addSubview(dummyImageView)
     }
     
     
     @objc func handleDummyImageTap() {
         fetchAndDisplayKickboardInfo()
-
+        
         // 더미 이미지를 탭하면 더미 데이터를 생성하고 저장, 그리고 레이블에 표시
         let dummyKickboardID = "12345" // 더미 킥보드 ID
         rentedKickboardID = dummyKickboardID
-
+        
         // 더미 킥보드 객체 생성
         let dummyKickboard = Kickboard(uniqueID: dummyKickboardID, isRented: false, batteryLevel: 100)
         
@@ -58,7 +58,7 @@ class KickBoardRegisterViewController: UIViewController {
         updateRentReturnButton(isRented: dummyKickboard.isRented)
         updateKickboardInfoLabels(kickboardID: dummyKickboard.uniqueID, returnInfo: "Available for Rent", batteryInfo: dummyKickboard.batteryLevel)
     }
-
+    
     
     func updateRentReturnButton(isRented: Bool) {
         if isRented {
@@ -87,7 +87,10 @@ class KickBoardRegisterViewController: UIViewController {
         alertController.addAction(UIAlertAction(title: "예", style: .default, handler: { [weak self] _ in
             var updatedKickboard = kickboard
             updatedKickboard.isRented.toggle()
+            
+            // 킥보드의 대여 상태를 업데이트합니다.
             KickboardManager.shared.saveKickboard(kickboard: updatedKickboard)
+            
             self?.updateRentReturnButton(isRented: updatedKickboard.isRented)
             
             // 레이블 업데이트 (더미 데이터로 설정됨)
