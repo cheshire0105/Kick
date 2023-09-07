@@ -29,6 +29,9 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="메인화면"/>
+                                                <connections>
+                                                    <action selector="goToMapButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="8Xx-dw-FtC"/>
+                                                </connections>
                                             </button>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" style="plain" id="YD7-jS-6Ct">
@@ -173,6 +176,16 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Mypage" id="I9b-2j-z3M"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="displayedContact" destination="Tx2-KH-I0U" id="fdp-tl-cBU"/>
+                        <outlet property="displayedCredit" destination="onp-E6-nnO" id="qpF-LY-4Lj"/>
+                        <outlet property="displayedID" destination="Uv7-5D-adp" id="6Ja-tq-sSf"/>
+                        <outlet property="displayedImage" destination="xQh-Zo-whp" id="Adh-47-YGK"/>
+                        <outlet property="displayedLevel" destination="yFg-jq-mHB" id="gVV-oS-VDO"/>
+                        <outlet property="displayedLicense" destination="dbD-Ix-i6w" id="chf-dp-rjV"/>
+                        <outlet property="displayedName" destination="Osp-KA-xKl" id="Wx3-Tt-HzF"/>
+                        <outlet property="occupiedButton" destination="Ga9-hN-Szt" id="Vbq-z1-OrA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
