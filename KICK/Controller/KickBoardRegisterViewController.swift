@@ -10,6 +10,8 @@ import AVFoundation
 
 class KickBoardRegisterViewController: UIViewController {
     
+    var selectedKickboardID: String? // 킥보드 저장 프로퍼티 추가
+    
     // 카메라 뷰
     @IBOutlet weak var cameraView: UIView!
     
@@ -35,12 +37,14 @@ class KickBoardRegisterViewController: UIViewController {
         dummyImageView.contentMode = .scaleAspectFit
         dummyImageView.isUserInteractionEnabled = true
         dummyImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDummyImageTap)))
-        
+
         cameraView.addSubview(dummyImageView)
     }
     
     
     @objc func handleDummyImageTap() {
+        fetchAndDisplayKickboardInfo()
+
         // 더미 이미지를 탭하면 더미 데이터를 생성하고 저장, 그리고 레이블에 표시
         let dummyKickboardID = "12345" // 더미 킥보드 ID
         rentedKickboardID = dummyKickboardID
@@ -114,4 +118,29 @@ class KickBoardRegisterViewController: UIViewController {
     }
     
     
+}
+
+// MARK: - 킥보드 불러오는 함수
+extension KickBoardRegisterViewController {
+    
+    func fetchAndDisplayKickboardInfo() {
+        if let kickboardID = selectedKickboardID, let kickboard = KickboardManager.shared.getKickboard(uniqueID: kickboardID) {
+            // 킥보드 정보로 레이블 업데이트
+            updateKickboardInfoLabels(kickboard: kickboard)
+        } else {
+            // 더미 데이터로 레이블 업데이트
+            displayDummyKickboardInfo()
+        }
+    }
+    
+    func updateKickboardInfoLabels(kickboard: Kickboard) {
+        kickboardInfoLabel.text = "킥보드 아이디: \(kickboard.uniqueID)"
+        returnInfoLabel.text = "대여 여부: \(kickboard.isRented ? "Rented" : "Available for Rent")"
+        batteryInfoLabel.text = "배터리 잔량: \(kickboard.batteryLevel)%"
+    }
+    
+    func displayDummyKickboardInfo() {
+        let dummyKickboard = Kickboard(uniqueID: "12345", isRented: false, batteryLevel: 100) // 더미 킥보드 객체 생성
+        updateKickboardInfoLabels(kickboard: dummyKickboard)
+    }
 }
