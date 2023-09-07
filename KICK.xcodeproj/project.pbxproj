@@ -48,7 +48,7 @@
 		FF557F2E2AA569DC00C9CAEC /* Mypage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Mypage.storyboard; sourceTree = "<group>"; };
 		FF557F302AA56A0000C9CAEC /* KickBoardRegister.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = KickBoardRegister.storyboard; sourceTree = "<group>"; };
 		FF557F322AA56A2000C9CAEC /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		FF557F342AA56A2A00C9CAEC /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		FF557F342AA56A2A00C9CAEC /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; usesTabs = 0; };
 		FF557F362AA56A4500C9CAEC /* KickBoardRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KickBoardRegisterViewController.swift; sourceTree = "<group>"; };
 		FF557F382AA56A6E00C9CAEC /* MypageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageViewController.swift; sourceTree = "<group>"; };
 		FF557F3D2AA56FCD00C9CAEC /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
