@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1FF7A02C2AA6B0260010D428 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF7A02B2AA6B0260010D428 /* SignUpViewController.swift */; };
+		63EBDD4B2AA9AD1000D30B2B /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EBDD4A2AA9AD1000D30B2B /* EditProfileViewController.swift */; };
+		63EBDD4D2AA9B3CD00D30B2B /* UsageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EBDD4C2AA9B3CD00D30B2B /* UsageViewController.swift */; };
 		81955BDC69A116F7D438FF9F /* Pods_KICK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B089597A7189A80A0D9C1B02 /* Pods_KICK.framework */; };
 		AB8AF33F2AA5BD5D009A5644 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = AB8AF33E2AA5BD5D009A5644 /* SnapKit */; };
 		FF006F542AA58CEF00A3CB8A /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF006F532AA58CEF00A3CB8A /* Model.swift */; };
@@ -32,6 +34,8 @@
 /* Begin PBXFileReference section */
 		1FF7A02B2AA6B0260010D428 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		4C6BE8FA72AC6B640ABB9574 /* Pods-KICK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KICK.release.xcconfig"; path = "Target Support Files/Pods-KICK/Pods-KICK.release.xcconfig"; sourceTree = "<group>"; };
+		63EBDD4A2AA9AD1000D30B2B /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		63EBDD4C2AA9B3CD00D30B2B /* UsageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageViewController.swift; sourceTree = "<group>"; };
 		A8DA9685DDAD710D00540C3D /* Pods-KICK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KICK.debug.xcconfig"; path = "Target Support Files/Pods-KICK/Pods-KICK.debug.xcconfig"; sourceTree = "<group>"; };
 		B089597A7189A80A0D9C1B02 /* Pods_KICK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KICK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF006F532AA58CEF00A3CB8A /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
@@ -84,6 +88,16 @@
 				4C6BE8FA72AC6B640ABB9574 /* Pods-KICK.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		63EBDD492AA9ACCE00D30B2B /* Mypage */ = {
+			isa = PBXGroup;
+			children = (
+				FF557F382AA56A6E00C9CAEC /* MypageViewController.swift */,
+				63EBDD4A2AA9AD1000D30B2B /* EditProfileViewController.swift */,
+				63EBDD4C2AA9B3CD00D30B2B /* UsageViewController.swift */,
+			);
+			path = Mypage;
 			sourceTree = "<group>";
 		};
 		6C98A43EF9A4972452DD7949 /* Frameworks */ = {
@@ -155,7 +169,7 @@
 				1FF7A02A2AA6AFF50010D428 /* Login */,
 				FF557F3D2AA56FCD00C9CAEC /* TabBarController.swift */,
 				FF557F342AA56A2A00C9CAEC /* MapViewController.swift */,
-				FF557F382AA56A6E00C9CAEC /* MypageViewController.swift */,
+				63EBDD492AA9ACCE00D30B2B /* Mypage */,
 				FF557F362AA56A4500C9CAEC /* KickBoardRegisterViewController.swift */,
 			);
 			path = Controller;
@@ -294,6 +308,8 @@
 				FF557F3E2AA56FCD00C9CAEC /* TabBarController.swift in Sources */,
 				FF557F372AA56A4500C9CAEC /* KickBoardRegisterViewController.swift in Sources */,
 				FF557F192AA5695B00C9CAEC /* SceneDelegate.swift in Sources */,
+				63EBDD4D2AA9B3CD00D30B2B /* UsageViewController.swift in Sources */,
+				63EBDD4B2AA9AD1000D30B2B /* EditProfileViewController.swift in Sources */,
 				FFDAD66D2AA5B11D00FCCEAB /* KickboardManager.swift in Sources */,
 				FF36A79A2AA5F00800980717 /* UserManager.swift in Sources */,
 				FF006F542AA58CEF00A3CB8A /* Model.swift in Sources */,
