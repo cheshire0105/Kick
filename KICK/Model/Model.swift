@@ -19,7 +19,7 @@ struct User: Codable {
     var usageFee: Int?
     var membershipLevel: MembershipLevel?
     
-    var pickedImage: String?
+    var userImage: String?
     var userName: String?
     var userContact: String?
     var userCredit: String?
