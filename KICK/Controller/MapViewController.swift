@@ -18,6 +18,8 @@ class MapViewController: UIViewController, NMFMapViewOptionDelegate {
     private var currentLatitude = 0.0
     private var currentLongitude = 0.0
     
+    let kickboardManager = KickboardManager.shared
+    
     private let registerButton = {
         let button = UIButton()
         button.addTarget(self, action: #selector(registerButtonAction), for: .touchUpInside)
@@ -31,21 +33,25 @@ class MapViewController: UIViewController, NMFMapViewOptionDelegate {
         
         DispatchQueue.global(qos: .default).async { [self] in
             generateRandomLocation()
-            var markers = [NMFMarker]()
+            var markers: [[Any]] = []
             // 백그라운드 스레드
             for index in kickboardCoordinates {
                 let marker = NMFMarker(position: NMGLatLng(lat: index[0], lng: index[1])
                                        , iconImage: NMFOverlayImage(name: "KickBoard"))
-                markers.append(marker)
+                let kickboard = Kickboard(uniqueID: UUID().uuidString, isRented: false, batteryLevel: 75)
+                kickboardManager.saveKickboard(kickboard: kickboard)
+                markers.append([marker, kickboard.uniqueID])
             }
             
             DispatchQueue.main.async { [weak self] in
                 // 메인 스레드
-                for marker in markers {
-                    marker.mapView = self?.mapView
-                    marker.touchHandler = {(overlay: NMFOverlay) -> Bool in
-                        print("마커 클릭함")
-                        return true
+                for item in markers {
+                    if let marker = item[0] as? NMFMarker, let uniqueID = item[1] as? String {
+                        marker.mapView = self?.mapView
+                        marker.touchHandler = { (overlay: NMFOverlay) -> Bool in
+                            print("마커 클릭함")
+                            return true
+                        }
                     }
                 }
                 
