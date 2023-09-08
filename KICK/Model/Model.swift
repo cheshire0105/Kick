@@ -51,4 +51,10 @@ struct Kickboard: Codable {
     var isRented: Bool
     var batteryLevel: Int // 배터리 수준을 퍼센트로 표시 (0~100)
 
+    // 초기화 메소드 추가
+    init(uniqueID: String, isRented: Bool, batteryLevel: Int) {
+        self.uniqueID = uniqueID
+        self.isRented = isRented
+        self.batteryLevel = batteryLevel
+    }
 }
