@@ -23,9 +23,8 @@ class EditProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //        setupUserData()
         setupProfilePhoto()
-        //        editProfile()
+
     }
     // 등록버튼 클릭시(유저 데이터 저장 및 업데이트)
     @IBAction func editProfile(_ sender: Any) {
@@ -40,7 +39,6 @@ class EditProfileViewController: UIViewController {
             newUser.userLicense = userLicense.text ?? newUser.userLicense
             
             userData.saveUser(user: newUser) // 유저 데이터를 수정하고 저장
-            
         } else {
             return dismiss(animated: true, completion: nil)
         }
@@ -53,9 +51,15 @@ class EditProfileViewController: UIViewController {
         let cancelAction = UIAlertAction(title: "아니오", style: .cancel, handler: nil)
         deleteAlert.addAction(cancelAction)
         present(deleteAlert, animated: true)
-        // '네' 클릭시 -> 사용자 정보 삭제 후 -> 로그인 페이지로 이동 ⭐️⭐️⭐️
+
+        // '네' 클릭시 ->
         let okAction = UIAlertAction(title: "네", style: .default, handler: nil)
         deleteAlert.addAction(okAction)
+        // 사용자 정보 삭제 후 ->
+        if let userID = currentUserID {
+            userData.deleteUser(id: userID)
+            }
+        // 로그인 페이지로 이동 ⭐️⭐️⭐️
     }
     
     // 취소버튼 클릭시(MyPage로 화면전환)
