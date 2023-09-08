@@ -23,6 +23,7 @@ class MapViewController: UIViewController, NMFMapViewOptionDelegate {
     private let registerButton = {
         let button = UIButton()
         button.addTarget(self, action: #selector(registerButtonAction), for: .touchUpInside)
+        
         return button
     }()
     
