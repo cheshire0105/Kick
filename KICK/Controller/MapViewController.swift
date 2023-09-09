@@ -25,6 +25,7 @@ class MapViewController: UIViewController, NMFMapViewOptionDelegate, NMFMapViewD
         button.backgroundColor = .lightGray
         button.setTitle("등록하기", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
+        button.isEnabled = false 
         
         button.addTarget(self, action: #selector(registerButtonAction), for: .touchUpInside)
         return button
@@ -170,12 +171,13 @@ extension MapViewController: CLLocationManagerDelegate, NMFMapViewTouchDelegate 
     func handleMarkerTouch(uniqueId: String) {
         print("마커 클릭함")
         registerButton.backgroundColor = .red
+        registerButton.isEnabled = true
     }
     
     func mapView(_ mapView: NMFMapView, didTapMap latlng: NMGLatLng, point: CGPoint) {
         print("지도를 탭했습니다.")
-
         registerButton.backgroundColor = .lightGray
+        registerButton.isEnabled = false
     }
 
 }
