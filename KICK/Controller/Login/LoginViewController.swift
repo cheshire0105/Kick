@@ -222,37 +222,24 @@ class LoginViewController: UIViewController {
                         present(tabBarController, animated: true) {
                             self.navigationController?.viewControllers.remove(at: 0)
                         }
-                        
+                      
                     } else {
                         print("로그인 실패")
-                        let alertController = UIAlertController(title: "로그인 실패", message: "ID 또는 비밀번호가 일치하지 않습니다.", preferredStyle: .alert)
-                        let okAction = UIAlertAction(title: "돌아가기", style: .default, handler: nil)
-                        alertController.addAction(okAction)
-                        present(alertController, animated: true, completion: nil)
+                       showAlertWhenLoginFails(message: "ID 또는 비밀번호가 일치하지 않습니다.")
                     }
-                } else { // 사용자 정보가 없는 경우
+                } else {
                     print("비밀번호 틀림.")
-                    let alertController = UIAlertController(title: "로그인 실패", message: "비밀번호 틀림.", preferredStyle: .alert)
-                    let okAction = UIAlertAction(title: "돌아가기", style: .default, handler: nil)
-                    alertController.addAction(okAction)
-                    present(alertController, animated: true, completion: nil)
+                    showAlertWhenLoginFails(message: "비밀번호 틀림.")
                 }
             } else {
                 print("ID와 비밀번호를 다시 확인해주세요.")
-                let alertController = UIAlertController(title: "로그인 실패", message: "ID와 비밀번호를 다시 확인해주세요.", preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "돌아가기", style: .default, handler: nil)
-                alertController.addAction(okAction)
-                present(alertController, animated: true, completion: nil)
+                showAlertWhenLoginFails(message: "ID와 비밀번호를 다시 확인해주세요.")
             }
         } else {
             print("뭐라도 입력하세요.")
-            let alertController = UIAlertController(title: "로그인 실패", message: "뭐라도 입력은 해보세요.", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "돌아가기", style: .default, handler: nil)
-            alertController.addAction(okAction)
-            present(alertController, animated: true, completion: nil)
+            showAlertWhenLoginFails(message: "뭐라도 입력은 해보세요.")
         }
     }
-    
     
     @objc func signUpButtonClick() {
         print("회원가입 페이지로 가즈아")
@@ -265,5 +252,12 @@ class LoginViewController: UIViewController {
         logInButton.addTarget(self, action: #selector(logInButtonClick), for: .touchUpInside)
         signUpButton.addTarget(self, action: #selector(signUpButtonClick), for: .touchUpInside)
         idTextField.addTarget(self, action: #selector(idTextFieldTyped(_:)), for: .editingChanged)
+    }
+    
+    func showAlertWhenLoginFails (message: String) {
+        let alertController = UIAlertController(title: "로그인 실패", message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "돌아가기", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
     }
 }
