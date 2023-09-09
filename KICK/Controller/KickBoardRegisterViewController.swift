@@ -43,7 +43,7 @@ class KickBoardRegisterViewController: UIViewController {
     
     
     @objc func handleDummyImageTap() {
-        fetchAndDisplayKickboardInfo()
+        // fetchAndDisplayKickboardInfo()
         
         // 더미 이미지를 탭하면 더미 데이터를 생성하고 저장, 그리고 레이블에 표시
         let dummyKickboardID = "12345" // 더미 킥보드 ID
