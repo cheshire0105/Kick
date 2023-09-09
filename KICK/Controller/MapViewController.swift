@@ -18,6 +18,7 @@ class MapViewController: UIViewController, NMFMapViewOptionDelegate, NMFMapViewD
     private var currentLongitude = 0.0
     
     let kickboardManager = KickboardManager.shared
+    var currentKickboardID: String?
     
     private let registerButton = {
         let button = UIButton()
@@ -25,7 +26,7 @@ class MapViewController: UIViewController, NMFMapViewOptionDelegate, NMFMapViewD
         button.backgroundColor = .lightGray
         button.setTitle("등록하기", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
-        button.isEnabled = false 
+        button.isEnabled = false
         
         button.addTarget(self, action: #selector(registerButtonAction), for: .touchUpInside)
         return button
