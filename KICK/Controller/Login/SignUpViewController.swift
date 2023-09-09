@@ -42,6 +42,7 @@ class SignUpViewController: UIViewController {
         textField.textAlignment = .center
         textField.layer.borderColor = UIColor.red.cgColor
         textField.layer.borderWidth = 1.0
+        textField.tintColor = .magenta
         textField.clearButtonMode = .whileEditing
         textField.clearsOnBeginEditing = true
         return textField
@@ -58,9 +59,12 @@ class SignUpViewController: UIViewController {
         textField.textAlignment = .center
         textField.layer.borderColor = UIColor.red.cgColor
         textField.layer.borderWidth = 1.0
+        textField.tintColor = .magenta
         textField.clearButtonMode = .whileEditing
         textField.clearsOnBeginEditing = true
         textField.isSecureTextEntry = true
+        textField.textContentType = .oneTimeCode
+
         return textField
     }()
     
@@ -75,9 +79,12 @@ class SignUpViewController: UIViewController {
         textField.textAlignment = .center
         textField.layer.borderColor = UIColor.red.cgColor
         textField.layer.borderWidth = 1.0
+        textField.tintColor = .magenta
         textField.clearButtonMode = .whileEditing
         textField.clearsOnBeginEditing = true
         textField.isSecureTextEntry = true
+        textField.textContentType = .oneTimeCode
+
         return textField
     }()
     
@@ -139,11 +146,11 @@ class SignUpViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .white
-        
         configureMakingAccountInputView()
-        
         configureLayout()
         buttonClick()
+        
+        
     }
     
     // MARK: - layout
@@ -225,7 +232,7 @@ class SignUpViewController: UIViewController {
             make.leading.equalTo(checkingPasswordTextField).offset(20)
         }
     }
-    
+
     // MARK: - func click event
 
     @objc func okButtonClick() {
