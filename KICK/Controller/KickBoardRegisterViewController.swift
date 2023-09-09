@@ -130,7 +130,7 @@ class KickBoardRegisterViewController: UIViewController {
 // MARK: - 킥보드 불러오는 함수
 extension KickBoardRegisterViewController {
     
-    func fetchAndDisplayKickboardInfo() {
+    func fetchAndDisplayKickboardInfo(kickboardID: String?) {
         if let kickboardID = selectedKickboardID, let kickboard = KickboardManager.shared.getKickboard(uniqueID: kickboardID) {
             // 킥보드 정보로 레이블 업데이트
             updateKickboardInfoLabels(kickboard: kickboard)
