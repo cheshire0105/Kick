@@ -21,13 +21,11 @@ class MapViewController: UIViewController, NMFMapViewOptionDelegate {
     
     private let registerButton = {
         let button = UIButton()
-        button.layer.borderWidth = 2
-        button.layer.borderColor = UIColor.gray.cgColor
         button.layer.cornerRadius = 10
         button.backgroundColor = .lightGray
         button.setTitle("등록하기", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
-
+        
         button.addTarget(self, action: #selector(registerButtonAction), for: .touchUpInside)
         return button
     }()
@@ -36,39 +34,8 @@ class MapViewController: UIViewController, NMFMapViewOptionDelegate {
         super.viewDidLoad()
         
         configureCoreLocation()
+        setupMapAndMarkers()
         
-        DispatchQueue.global(qos: .default).async { [self] in
-            generateRandomLocation()
-            var markers: [[Any]] = []
-            // 백그라운드 스레드
-            for index in kickboardCoordinates {
-                let marker = NMFMarker(position: NMGLatLng(lat: index[0], lng: index[1])
-                                       , iconImage: NMFOverlayImage(name: "KickBoard"))
-                let kickboard = Kickboard(uniqueID: UUID().uuidString, isRented: false, batteryLevel: 75)
-                kickboardManager.saveKickboard(kickboard: kickboard)
-                markers.append([marker, kickboard.uniqueID])
-            }
-            
-            DispatchQueue.main.async { [weak self] in
-                // 메인 스레드
-                for item in markers {
-                    if let marker = item[0] as? NMFMarker, let uniqueID = item[1] as? String {
-                        marker.mapView = self?.mapView
-                        marker.touchHandler = { (overlay: NMFOverlay) -> Bool in
-                            print("마커 클릭함")
-                            
-                            return true
-                        }
-                    }
-                }
-                
-                print("marker 생성 완료")
-                print("map 생성 시작")
-                self?.configureMap()
-                self?.configureLayout()
-            }
-            
-        }
     }
     
     func configureMap() {
@@ -86,7 +53,7 @@ class MapViewController: UIViewController, NMFMapViewOptionDelegate {
         mapView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-
+        
         registerButton.snp.makeConstraints { make in
             make.height.equalTo(50)
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-10)
@@ -108,6 +75,7 @@ class MapViewController: UIViewController, NMFMapViewOptionDelegate {
             self.present(kickBoardRegisterVC, animated: true, completion: nil)
         }
     }
+    
 }
 
 
@@ -165,5 +133,43 @@ extension MapViewController: CLLocationManagerDelegate {
         }
         
         print(kickboardCoordinates)
+    }
+    
+    func setupMapAndMarkers() {
+        DispatchQueue.global(qos: .default).async { [self] in
+            generateRandomLocation()
+            var markers: [[Any]] = []
+
+            // 백그라운드 스레드
+            for index in kickboardCoordinates {
+                let marker = NMFMarker(position: NMGLatLng(lat: index[0], lng: index[1]), iconImage: NMFOverlayImage(name: "KickBoard"))
+                let kickboard = Kickboard(uniqueID: UUID().uuidString, isRented: false, batteryLevel: 75)
+                kickboardManager.saveKickboard(kickboard: kickboard)
+                markers.append([marker, kickboard.uniqueID])
+            }
+            
+            DispatchQueue.main.async { [weak self] in
+                // 메인 스레드
+                for item in markers {
+                    if let marker = item[0] as? NMFMarker, let uniqueID = item[1] as? String {
+                        marker.mapView = self?.mapView
+                        marker.touchHandler = { [weak self] (overlay: NMFOverlay) -> Bool in
+                            self?.handleMarkerTouch(uniqueId: uniqueID)
+                             return true
+                        }
+                    }
+                }
+                
+                print("marker 생성 완료")
+                print("map 생성 시작")
+                self?.configureMap()
+                self?.configureLayout()
+            }
+        }
+    }
+    
+    func handleMarkerTouch(uniqueId: String) {
+        print("마커 클릭함")
+        registerButton.backgroundColor = .red
     }
 }
