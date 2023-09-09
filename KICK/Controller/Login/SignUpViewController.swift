@@ -42,6 +42,7 @@ class SignUpViewController: UIViewController {
         textField.textAlignment = .center
         textField.layer.borderColor = UIColor.red.cgColor
         textField.layer.borderWidth = 1.0
+        textField.tintColor = .magenta
         textField.clearButtonMode = .whileEditing
         textField.clearsOnBeginEditing = true
         return textField
@@ -58,6 +59,7 @@ class SignUpViewController: UIViewController {
         textField.textAlignment = .center
         textField.layer.borderColor = UIColor.red.cgColor
         textField.layer.borderWidth = 1.0
+        textField.tintColor = .magenta
         textField.clearButtonMode = .whileEditing
         textField.clearsOnBeginEditing = true
         textField.isSecureTextEntry = true
@@ -75,6 +77,7 @@ class SignUpViewController: UIViewController {
         textField.textAlignment = .center
         textField.layer.borderColor = UIColor.red.cgColor
         textField.layer.borderWidth = 1.0
+        textField.tintColor = .magenta
         textField.clearButtonMode = .whileEditing
         textField.clearsOnBeginEditing = true
         textField.isSecureTextEntry = true
