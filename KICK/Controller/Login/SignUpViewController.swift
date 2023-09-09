@@ -63,6 +63,8 @@ class SignUpViewController: UIViewController {
         textField.clearButtonMode = .whileEditing
         textField.clearsOnBeginEditing = true
         textField.isSecureTextEntry = true
+        textField.textContentType = .oneTimeCode
+
         return textField
     }()
     
@@ -81,6 +83,8 @@ class SignUpViewController: UIViewController {
         textField.clearButtonMode = .whileEditing
         textField.clearsOnBeginEditing = true
         textField.isSecureTextEntry = true
+        textField.textContentType = .oneTimeCode
+
         return textField
     }()
     
@@ -142,11 +146,11 @@ class SignUpViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .white
-        
         configureMakingAccountInputView()
-        
         configureLayout()
         buttonClick()
+        
+        
     }
     
     // MARK: - layout
@@ -228,7 +232,7 @@ class SignUpViewController: UIViewController {
             make.leading.equalTo(checkingPasswordTextField).offset(20)
         }
     }
-    
+
     // MARK: - func click event
 
     @objc func okButtonClick() {

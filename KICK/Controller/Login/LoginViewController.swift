@@ -7,7 +7,6 @@
 
 // MARK: - KICK APPLICATION
 
-import Foundation
 import SnapKit
 import UIKit
 
@@ -92,7 +91,8 @@ class LoginViewController: UIViewController {
         textField.clearButtonMode = .whileEditing
         textField.clearsOnBeginEditing = true
         textField.isSecureTextEntry = true
-        
+        textField.textContentType = .oneTimeCode
+
         return textField
     }()
     
@@ -225,7 +225,7 @@ class LoginViewController: UIViewController {
                       
                     } else {
                         print("로그인 실패")
-                       showAlertWhenLoginFails(message: "ID 또는 비밀번호가 일치하지 않습니다.")
+                        showAlertWhenLoginFails(message: "ID 또는 비밀번호가 일치하지 않습니다.")
                     }
                 } else {
                     print("비밀번호 틀림.")
@@ -254,7 +254,7 @@ class LoginViewController: UIViewController {
         idTextField.addTarget(self, action: #selector(idTextFieldTyped(_:)), for: .editingChanged)
     }
     
-    func showAlertWhenLoginFails (message: String) {
+    func showAlertWhenLoginFails(message: String) {
         let alertController = UIAlertController(title: "로그인 실패", message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "돌아가기", style: .default, handler: nil)
         alertController.addAction(okAction)
