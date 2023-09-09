@@ -4,7 +4,7 @@ import SnapKit
 import NMapsMap
 import CoreLocation
 
-class MapViewController: UIViewController, NMFMapViewOptionDelegate {
+class MapViewController: UIViewController, NMFMapViewOptionDelegate, NMFMapViewDelegate {
     
     // Properties
     private let mapView = NMFMapView()
@@ -39,6 +39,7 @@ class MapViewController: UIViewController, NMFMapViewOptionDelegate {
     }
     
     func configureMap() {
+        mapView.touchDelegate = self
         /* 현재 위치 표시 */
         mapView.positionMode = .normal
         /* 현재 위치 찾아주는 버튼 설정 */
@@ -86,7 +87,7 @@ extension MapViewController: NMFAuthManagerDelegate {
     }
 }
 
-extension MapViewController: CLLocationManagerDelegate {
+extension MapViewController: CLLocationManagerDelegate, NMFMapViewTouchDelegate {
     
     func configureCoreLocation() {
         locationManager.delegate = self
@@ -159,9 +160,7 @@ extension MapViewController: CLLocationManagerDelegate {
                         }
                     }
                 }
-                
-                print("marker 생성 완료")
-                print("map 생성 시작")
+
                 self?.configureMap()
                 self?.configureLayout()
             }
@@ -172,4 +171,11 @@ extension MapViewController: CLLocationManagerDelegate {
         print("마커 클릭함")
         registerButton.backgroundColor = .red
     }
+    
+    func mapView(_ mapView: NMFMapView, didTapMap latlng: NMGLatLng, point: CGPoint) {
+        print("지도를 탭했습니다.")
+
+        registerButton.backgroundColor = .lightGray
+    }
+
 }
