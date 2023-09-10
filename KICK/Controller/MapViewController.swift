@@ -75,9 +75,11 @@ class MapViewController: UIViewController, NMFMapViewOptionDelegate, NMFMapViewD
         let storyboard = UIStoryboard(name: "KickBoardRegister", bundle: nil)
         
         if let kickBoardRegisterVC = storyboard.instantiateViewController(withIdentifier: "KickBoardRegisterViewController") as? KickBoardRegisterViewController {
+            kickBoardRegisterVC.selectedKickboardID = currentKickboardID
             self.present(kickBoardRegisterVC, animated: true, completion: nil)
         }
     }
+
     
 }
 
@@ -173,6 +175,7 @@ extension MapViewController: CLLocationManagerDelegate, NMFMapViewTouchDelegate 
         print("마커 클릭함")
         registerButton.backgroundColor = .red
         registerButton.isEnabled = true
+        currentKickboardID = uniqueId
     }
     
     func mapView(_ mapView: NMFMapView, didTapMap latlng: NMGLatLng, point: CGPoint) {

@@ -46,11 +46,11 @@ class KickBoardRegisterViewController: UIViewController {
         // fetchAndDisplayKickboardInfo()
         
         // 더미 이미지를 탭하면 더미 데이터를 생성하고 저장, 그리고 레이블에 표시
-        let dummyKickboardID = "12345" // 더미 킥보드 ID
+        let dummyKickboardID = selectedKickboardID // 더미 킥보드 ID
         rentedKickboardID = dummyKickboardID
         
         // 더미 킥보드 객체 생성
-        let dummyKickboard = Kickboard(uniqueID: dummyKickboardID, isRented: false, batteryLevel: 100)
+        let dummyKickboard = Kickboard(uniqueID: dummyKickboardID ?? "로딩 실패", isRented: false, batteryLevel: 100)
         
         // 더미 킥보드 저장
         KickboardManager.shared.saveKickboard(kickboard: dummyKickboard)
@@ -147,7 +147,8 @@ extension KickBoardRegisterViewController {
     }
     
     func displayDummyKickboardInfo() {
-        let dummyKickboard = Kickboard(uniqueID: "12345", isRented: false, batteryLevel: 100) // 더미 킥보드 객체 생성
+        print(selectedKickboardID)
+        let dummyKickboard = Kickboard(uniqueID: selectedKickboardID ?? "킥보드 인식 실패", isRented: false, batteryLevel: 100) // 더미 킥보드 객체 생성
         updateKickboardInfoLabels(kickboard: dummyKickboard)
     }
 }
