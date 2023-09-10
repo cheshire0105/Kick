@@ -54,7 +54,10 @@ class MapViewController: UIViewController, NMFMapViewOptionDelegate, NMFMapViewD
         view.addSubview(positionButton)
         
         mapView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.top.equalToSuperview()
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
         }
         
         registerButton.snp.makeConstraints { make in
