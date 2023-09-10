@@ -118,11 +118,7 @@ class KickBoardRegisterViewController: UIViewController {
     
     
     func navigateToMypage() {
-        let storyboard = UIStoryboard(name: "Mypage", bundle: nil)  // 여기서 "YourStoryboardName"을 대상 스토리보드의 이름으로 교체하세요 (확장자 없이).
-        if let mypageViewController = storyboard.instantiateViewController(withIdentifier: "MypageViewController") as? MypageViewController {
-            mypageViewController.modalPresentationStyle = .fullScreen
-            present(mypageViewController, animated: true, completion: nil)
-        }
+        self.dismiss(animated: true)
     }
     
 }
