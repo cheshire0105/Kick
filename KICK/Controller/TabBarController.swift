@@ -12,18 +12,18 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        if let downcastStrings = self.tabBarController?.tabBar.items
+        {
+            downcastStrings[0].title = "Map"
+            downcastStrings[1].title = "MyPage"
+        }
+        
+        // tab bar item image 설정
+        self.tabBarController?.tabBar.items![0].image = UIImage(systemName: "map")
+        self.tabBarController?.tabBar.items![1].image = UIImage(systemName: "person.circle")
+        
+        // tab bar color 설정
+        self.tabBarController?.tabBar.backgroundColor = .white
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

@@ -54,7 +54,10 @@ class MapViewController: UIViewController, NMFMapViewOptionDelegate, NMFMapViewD
         view.addSubview(positionButton)
         
         mapView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.top.equalToSuperview()
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
         }
         
         registerButton.snp.makeConstraints { make in
@@ -75,9 +78,11 @@ class MapViewController: UIViewController, NMFMapViewOptionDelegate, NMFMapViewD
         let storyboard = UIStoryboard(name: "KickBoardRegister", bundle: nil)
         
         if let kickBoardRegisterVC = storyboard.instantiateViewController(withIdentifier: "KickBoardRegisterViewController") as? KickBoardRegisterViewController {
+            kickBoardRegisterVC.selectedKickboardID = currentKickboardID
             self.present(kickBoardRegisterVC, animated: true, completion: nil)
         }
     }
+
     
 }
 
@@ -173,6 +178,7 @@ extension MapViewController: CLLocationManagerDelegate, NMFMapViewTouchDelegate 
         print("마커 클릭함")
         registerButton.backgroundColor = .red
         registerButton.isEnabled = true
+        currentKickboardID = uniqueId
     }
     
     func mapView(_ mapView: NMFMapView, didTapMap latlng: NMGLatLng, point: CGPoint) {

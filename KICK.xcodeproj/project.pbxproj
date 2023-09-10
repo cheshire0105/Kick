@@ -166,8 +166,8 @@
 		FF557F3C2AA56A9B00C9CAEC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				1FF7A02A2AA6AFF50010D428 /* Login */,
 				FF557F3D2AA56FCD00C9CAEC /* TabBarController.swift */,
+				1FF7A02A2AA6AFF50010D428 /* Login */,
 				FF557F342AA56A2A00C9CAEC /* MapViewController.swift */,
 				63EBDD492AA9ACCE00D30B2B /* Mypage */,
 				FF557F362AA56A4500C9CAEC /* KickBoardRegisterViewController.swift */,
