@@ -11,6 +11,8 @@ class UserManager {
     
     static let shared = UserManager()
     
+    var currentUser: User?
+    
     private let userDefaults = UserDefaults.standard
     private let userKey = "userKey"
     

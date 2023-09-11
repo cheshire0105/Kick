@@ -13,7 +13,7 @@ class EditProfileViewController: UIViewController {
     let userData = UserManager.shared
     
     var user: User?
-   
+    
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var addProfilePhoto: UIButton!
     @IBOutlet weak var userName: UITextField!
@@ -25,6 +25,7 @@ class EditProfileViewController: UIViewController {
         super.viewDidLoad()
         user = userData.getUser(id: "사용자 ID")
         setupProfilePhoto()
+        updateUserInfo()
     }
     
     // 등록버튼 클릭시 유저 데이터 저장
@@ -35,7 +36,7 @@ class EditProfileViewController: UIViewController {
               let newCredit = userCredit.text,
               let newLicense = userLicense.text else {
             return dismiss(animated: true, completion: nil)
-    }
+        }
         user?.userName = newName
         user?.userContact = newContact
         user?.userCredit = newCredit
@@ -46,17 +47,28 @@ class EditProfileViewController: UIViewController {
         defaults.set(newCredit, forKey: "userCredit")
         defaults.set(newLicense, forKey: "userLicense")
         
+        print("사용자 정보가 수정되었습니다.")
+        print("이름: \(newName) | 연락처: \(newContact) | 카드정보: \(newCredit) | 운전면허: \(newLicense)")
+        print("-----------------------")
+        print("마이페이지로 돌아갑니다")
+        
         if let updatedUser = user {
-            userData.saveUser(user: updatedUser)
-            print("사용자 정보가 수정되었습니다.")
-            print("이름: \(newName) | 연락처: \(newContact) | 카드정보: \(newCredit) | 운전면허: \(newLicense)")
-            print("-----------------------")
-            print("마이페이지로 돌아갑니다")
+//            userData.saveUser(user: updatedUser)
+            UserManager.shared.currentUser = updatedUser
         }
+        
         // 저장후 마이페이지로 되돌아가는 화면전환 실행
-        let mypageViewController = MypageViewController()
-        mypageViewController.modalPresentationStyle = .fullScreen
-        present(mypageViewController, animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func updateUserInfo() {
+        if let user = user {
+            userName.text = user.userName
+            userContact.text = user.userContact
+            userCredit.text = user.userCredit
+            userLicense.text = user.userLicense
+        }
     }
     
     // 회원탈퇴버튼 클릭시 유저정보 삭제
@@ -67,7 +79,7 @@ class EditProfileViewController: UIViewController {
         let cancelAction = UIAlertAction(title: "아니오", style: .cancel, handler: nil)
         deleteAlert.addAction(cancelAction)
         present(deleteAlert, animated: true)
-
+        
         // '네' 클릭시
         let okAction = UIAlertAction(title: "네", style: .default, handler: nil)
         deleteAlert.addAction(okAction)
