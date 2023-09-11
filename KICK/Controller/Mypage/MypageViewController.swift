@@ -25,25 +25,32 @@ class MypageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 //        activateOccupyMode()
-        user = userData.getUser(id: "사용자 ID")
+
+//        user = userData.getUser(id: "사용자 ID")
         
-        if let user = user {
+//        if let user = user {
+        if let user = UserManager.shared.currentUser {
             displayedID.text = user.id
             displayedName.text = user.userName
             displayedContact.text = user.userContact
             displayedCredit.text = user.userCredit
             displayedLicense.text = user.userLicense
-            
         }
-
     }
     // 3. 킥보드 대여중일 경우, 이용중 버튼 컬러가 활성화 / 이용중이 아닐시 비활성화 ⭐️⭐️⭐️
 //    func activateOccupyMode() {
 //
 //    }
         // 4. 이용내역 표시하기 ⭐️⭐️⭐️⭐️⭐️
+//    func displayUsage() {}
+    
         // 5. 로그아웃 버튼 클릭시 로그인 상태 해제 및 로그인 페이지로 이동
     @IBAction func letLogoutButton(_ sender: Any) {
+     logOutUser()
+    }
+    func logOutUser() {
+        // 로그아웃 처리를 추가,
+        // 로그인 상태를 해제하고 로그인 화면으로 이동
         let loginViewController = LoginViewController()
         loginViewController.modalPresentationStyle = .fullScreen
         present(loginViewController, animated: true, completion: nil)
